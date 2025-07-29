@@ -61,7 +61,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Brand colors
+				'velvet-rose': 'hsl(var(--velvet-rose))',
+				'lilac-blush': 'hsl(var(--lilac-blush))',
+				'sapphire-blue': 'hsl(var(--sapphire-blue))',
+				'dusty-coral': 'hsl(var(--dusty-coral))'
+			},
+			fontFamily: {
+				'heading': ['DM Serif Display', 'serif'],
+				'body': ['Inter', 'sans-serif'],
+				'accent': ['Quicksand', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
