@@ -8,7 +8,7 @@
 @layer base {
   :root {
     /* Brand Color Palette */
-    --velvet-rose: 350 85% 75%;
+    --velvet-rose: 319 39% 83%;
     --lilac-blush: 320 45% 85%;
     --sapphire-blue: 220 90% 60%;
     --dusty-coral: 15 80% 75%;
@@ -67,7 +67,7 @@
 
   .dark {
     /* Dark theme brand colors - softened for elegance */
-    --velvet-rose: 350 65% 65%;
+    --velvet-rose: 319 39% 83%;
     --lilac-blush: 320 35% 75%;
     --sapphire-blue: 220 80% 70%;
     --dusty-coral: 15 70% 65%;
