@@ -13,6 +13,12 @@
     --sapphire-blue: 220 90% 60%;
     --dusty-coral: 15 80% 75%;
     
+    /* Job Status Colors */
+    --status-applied: 126 71% 90%;
+    --status-saved: 339 88% 58%;
+    --status-rejected: var(--velvet-rose);
+    --status-offer: var(--sapphire-blue);
+    
     /* Gradient definitions */
     --gradient-primary: linear-gradient(135deg, hsl(var(--velvet-rose)), hsl(var(--sapphire-blue)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--lilac-blush)), hsl(var(--dusty-coral)));

@@ -37,9 +37,9 @@ export interface JobFormData {
 }
 
 export const JOB_STATUSES = [
-  { value: 'saved', label: 'Saved', color: 'bg-muted' },
-  { value: 'applied', label: 'Applied', color: 'bg-sapphire-blue' },
+  { value: 'saved', label: 'Saved', color: 'bg-status-saved' },
+  { value: 'applied', label: 'Applied', color: 'bg-status-applied' },
   { value: 'interviewing', label: 'Interviewing', color: 'bg-dusty-coral' },
-  { value: 'offer', label: 'Offer', color: 'bg-velvet-rose' },
-  { value: 'rejected', label: 'Rejected', color: 'bg-destructive' },
+  { value: 'offer', label: 'Offer', color: 'bg-status-offer' },
+  { value: 'rejected', label: 'Rejected', color: 'bg-status-rejected' },
 ] as const;

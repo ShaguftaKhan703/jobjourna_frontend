@@ -66,7 +66,12 @@ export default {
 				'velvet-rose': 'hsl(var(--velvet-rose))',
 				'lilac-blush': 'hsl(var(--lilac-blush))',
 				'sapphire-blue': 'hsl(var(--sapphire-blue))',
-				'dusty-coral': 'hsl(var(--dusty-coral))'
+				'dusty-coral': 'hsl(var(--dusty-coral))',
+				// Job status colors
+				'status-applied': 'hsl(var(--status-applied))',
+				'status-saved': 'hsl(var(--status-saved))',
+				'status-rejected': 'hsl(var(--status-rejected))',
+				'status-offer': 'hsl(var(--status-offer))'
 			},
 			fontFamily: {
 				'heading': ['DM Serif Display', 'serif'],
