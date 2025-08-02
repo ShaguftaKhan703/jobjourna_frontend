@@ -25,7 +25,7 @@
     --gradient-accent: linear-gradient(180deg, hsl(var(--velvet-rose) / 0.3), hsl(var(--sapphire-blue) / 0.3));
     
     /* Design system tokens */
-    --background: 30 50% 93%;
+    --background: 27 50% 92%;
     --foreground: 8 5% 95%;
 
     --card: 0 0% 100%;
