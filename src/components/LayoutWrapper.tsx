@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Sidebar } from '@/components/Sidebar';
 import { Navbar } from '@/components/Navbar';
 import { AuthPage } from '@/pages/AuthPage';
+import { Home } from '@/pages/Home';
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
@@ -9,9 +11,13 @@ interface LayoutWrapperProps {
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const { authState } = useAuth();
+  const [showAuth, setShowAuth] = useState(false);
 
   if (!authState.isAuthenticated) {
-    return <AuthPage />;
+    if (showAuth) {
+      return <AuthPage />;
+    }
+    return <Home onNavigateToAuth={() => setShowAuth(true)} />;
   }
 
   return (

@@ -1,0 +1,418 @@
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Search, 
+  Target, 
+  BarChart3, 
+  Mail,
+  Star,
+  ArrowRight,
+  Menu,
+  X,
+  Users,
+  TrendingUp,
+  Shield
+} from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+
+interface HomeProps {
+  onNavigateToAuth: () => void;
+}
+
+export function Home({ onNavigateToAuth }: HomeProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const { authState } = useAuth();
+
+  const quotes = [
+    "Your dream job is just one application away.",
+    "Track your journey, land your dream.",
+    "Every rejection is a step closer to acceptance.",
+    "Organization is the key to opportunity."
+  ];
+
+  const features = [
+    {
+      icon: <Target className="h-6 w-6" />,
+      title: "Smart Job Tracking",
+      description: "Keep track of all your applications, interviews, and follow-ups in one place."
+    },
+    {
+      icon: <BarChart3 className="h-6 w-6" />,
+      title: "Progress Analytics",
+      description: "Visualize your job search progress with detailed analytics and insights."
+    },
+    {
+      icon: <Mail className="h-6 w-6" />,
+      title: "Email Integration",
+      description: "Automatically sync job updates from your email and track responses."
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Software Engineer",
+      content: "Job Journal helped me land my dream job at Google. The tracking features are incredible!",
+      rating: 5
+    },
+    {
+      name: "Michael Chen",
+      role: "Product Manager",
+      content: "Finally, a tool that makes job hunting organized and stress-free. Highly recommended!",
+      rating: 5
+    },
+    {
+      name: "Emily Rodriguez",
+      role: "UX Designer",
+      content: "The analytics helped me understand my application patterns and improve my success rate.",
+      rating: 5
+    }
+  ];
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Implement newsletter signup
+    console.log('Newsletter signup:', email);
+    setEmail('');
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60 border-b">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-2">
+              <h1 className="font-heading text-xl font-bold gradient-primary bg-clip-text text-transparent">
+                Job Journal
+              </h1>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <button 
+                onClick={() => scrollToSection('about')}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                About Us
+              </button>
+              <button 
+                onClick={() => scrollToSection('newsletter')}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Newsletter
+              </button>
+              <button 
+                onClick={() => scrollToSection('feedback')}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Feedback
+              </button>
+              <button 
+                onClick={() => scrollToSection('community')}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                Community
+              </button>
+              <Button onClick={onNavigateToAuth} className="gradient-primary text-white">
+                Get Started
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden py-4 border-t">
+              <div className="flex flex-col space-y-4">
+                <button 
+                  onClick={() => scrollToSection('about')}
+                  className="text-left text-foreground hover:text-primary transition-colors"
+                >
+                  About Us
+                </button>
+                <button 
+                  onClick={() => scrollToSection('newsletter')}
+                  className="text-left text-foreground hover:text-primary transition-colors"
+                >
+                  Newsletter
+                </button>
+                <button 
+                  onClick={() => scrollToSection('feedback')}
+                  className="text-left text-foreground hover:text-primary transition-colors"
+                >
+                  Feedback
+                </button>
+                <button 
+                  onClick={() => scrollToSection('community')}
+                  className="text-left text-foreground hover:text-primary transition-colors"
+                >
+                  Community
+                </button>
+                <Button onClick={onNavigateToAuth} className="gradient-primary text-white w-full">
+                  Get Started
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="py-20 lg:py-32">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-heading text-4xl lg:text-6xl font-bold mb-6">
+              Transform Your <span className="gradient-primary bg-clip-text text-transparent">Job Search</span> Journey
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Track applications, analyze progress, and land your dream job with the most powerful job search management platform.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button 
+                size="lg" 
+                onClick={onNavigateToAuth}
+                className="gradient-primary text-white px-8 py-3 text-lg"
+              >
+                Start Your Journey
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => scrollToSection('about')}
+                className="px-8 py-3 text-lg"
+              >
+                Learn More
+              </Button>
+            </div>
+
+            {/* Quote Carousel */}
+            <div className="max-w-2xl mx-auto">
+              <blockquote className="text-lg font-medium text-muted-foreground italic">
+                "{quotes[Math.floor(Math.random() * quotes.length)]}"
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">
+              Why Choose Job Journal?
+            </h3>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Powerful features designed to streamline your job search and maximize your success rate.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="text-center shadow-elegant">
+                <CardContent className="pt-8">
+                  <div className="gradient-primary w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 text-white">
+                    {feature.icon}
+                  </div>
+                  <h4 className="font-heading text-xl font-semibold mb-3">{feature.title}</h4>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">About Job Journal</h3>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="text-left">
+                <p className="text-lg text-muted-foreground mb-6">
+                  Job Journal was born from the frustration of managing countless job applications across spreadsheets, emails, and sticky notes. We believe that finding your dream job shouldn't be chaotic.
+                </p>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Our platform combines intelligent tracking, insightful analytics, and seamless integrations to transform your job search from overwhelming to organized.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Badge variant="secondary" className="px-3 py-1">
+                    <Users className="h-4 w-4 mr-2" />
+                    10K+ Users
+                  </Badge>
+                  <Badge variant="secondary" className="px-3 py-1">
+                    <TrendingUp className="h-4 w-4 mr-2" />
+                    85% Success Rate
+                  </Badge>
+                  <Badge variant="secondary" className="px-3 py-1">
+                    <Shield className="h-4 w-4 mr-2" />
+                    Privacy First
+                  </Badge>
+                </div>
+              </div>
+              <div className="gradient-secondary rounded-lg p-8 text-center">
+                <h4 className="font-heading text-2xl font-bold mb-4">Our Mission</h4>
+                <p className="text-muted-foreground">
+                  To empower job seekers with the tools and insights they need to navigate their career journey with confidence and clarity.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Section */}
+      <section id="community" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">Join Our Community</h3>
+          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Connect with thousands of job seekers, share experiences, and get support from our vibrant community.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
+              <div className="text-muted-foreground">Active Members</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary mb-2">500+</div>
+              <div className="text-muted-foreground">Success Stories</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-primary mb-2">24/7</div>
+              <div className="text-muted-foreground">Community Support</div>
+            </div>
+          </div>
+          <Button size="lg" onClick={onNavigateToAuth} className="gradient-primary text-white">
+            Join the Community
+          </Button>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section id="newsletter" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">Stay Updated</h3>
+            <p className="text-xl text-muted-foreground mb-8">
+              Get the latest job market insights, career tips, and platform updates delivered to your inbox.
+            </p>
+            <Card className="shadow-elegant">
+              <CardContent className="p-8">
+                <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="flex-1"
+                  />
+                  <Button type="submit" className="gradient-primary text-white">
+                    Subscribe
+                  </Button>
+                </form>
+                <p className="text-sm text-muted-foreground mt-4">
+                  No spam, unsubscribe at any time. We respect your privacy.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Feedback/Testimonials Section */}
+      <section id="feedback" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">What Our Users Say</h3>
+            <p className="text-xl text-muted-foreground">
+              Real feedback from real job seekers who found success with Job Journal.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="shadow-elegant">
+                <CardContent className="p-6">
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 italic">"{testimonial.content}"</p>
+                  <div>
+                    <div className="font-semibold">{testimonial.name}</div>
+                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h4 className="font-heading text-lg font-bold mb-4 gradient-primary bg-clip-text text-transparent">
+                Job Journal
+              </h4>
+              <p className="text-muted-foreground mb-4">
+                Transform your job search journey with intelligent tracking and insights.
+              </p>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Product</h5>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Extensions</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Company</h5>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Support</h5>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
+            <p>&copy; 2024 Job Journal. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
