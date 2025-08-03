@@ -15,8 +15,9 @@ import {
   Users,
   TrendingUp,
   Shield
-} from 'lucide-react';
+ } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface HomeProps {
   onNavigateToAuth: () => void;
@@ -413,6 +414,11 @@ export function Home({ onNavigateToAuth }: HomeProps) {
           </div>
         </div>
       </footer>
+
+      {/* Floating Theme Toggle */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
