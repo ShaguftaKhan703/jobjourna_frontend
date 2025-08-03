@@ -15,7 +15,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
 
   if (!authState.isAuthenticated) {
     if (showAuth) {
-      return <AuthPage />;
+      return <AuthPage onNavigateToHome={() => setShowAuth(false)} />;
     }
     return <Home onNavigateToAuth={() => setShowAuth(true)} />;
   }

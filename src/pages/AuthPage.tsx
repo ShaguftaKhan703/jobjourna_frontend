@@ -6,9 +6,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Briefcase, Sparkles, Eye, EyeOff } from 'lucide-react';
+import { Briefcase, Sparkles, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
-export function AuthPage() {
+interface AuthPageProps {
+  onNavigateToHome?: () => void;
+}
+
+export function AuthPage({ onNavigateToHome }: AuthPageProps) {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [registerData, setRegisterData] = useState({ email: '', password: '', name: '' });
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -53,6 +57,17 @@ export function AuthPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-lilac-blush/10 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
+        {/* Back to Home Button */}
+        {onNavigateToHome && (
+          <Button
+            variant="ghost"
+            onClick={onNavigateToHome}
+            className="flex items-center space-x-2 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Home</span>
+          </Button>
+        )}
         {/* Hero Section */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center space-x-2">
