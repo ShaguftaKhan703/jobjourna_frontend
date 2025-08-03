@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Upload, FileText, Download, Edit, Trash2, Plus, Eye } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -48,7 +49,9 @@ export function MyDocuments() {
     },
   ]);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [viewedDocument, setViewedDocument] = useState<Document | null>(null);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, documentType?: 'resume' | 'cover-letter') => {
     const files = event.target.files;
     if (!files) return;
 
@@ -56,7 +59,7 @@ export function MyDocuments() {
       const newDoc: Document = {
         id: Date.now().toString() + Math.random(),
         name: file.name,
-        type: file.name.toLowerCase().includes('resume') ? 'resume' : 'cover-letter',
+        type: documentType || (file.name.toLowerCase().includes('resume') ? 'resume' : 'cover-letter'),
         lastModified: new Date(),
         size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
       };
@@ -95,6 +98,25 @@ export function MyDocuments() {
     });
   };
 
+  const handleView = (doc: Document) => {
+    setViewedDocument(doc);
+  };
+
+  const handleDownload = (doc: Document) => {
+    // In a real app, this would download the actual file
+    const link = window.document.createElement('a');
+    link.href = '#'; // This would be the actual file URL
+    link.download = doc.name;
+    window.document.body.appendChild(link);
+    link.click();
+    window.document.body.removeChild(link);
+    
+    toast({
+      title: "Download started",
+      description: `Downloading ${doc.name}...`,
+    });
+  };
+
   const resumes = documents.filter(doc => doc.type === 'resume');
   const coverLetters = documents.filter(doc => doc.type === 'cover-letter');
 
@@ -116,7 +138,7 @@ export function MyDocuments() {
               id="file-upload"
               multiple
               accept=".pdf,.doc,.docx"
-              onChange={handleFileUpload}
+              onChange={(e) => handleFileUpload(e)}
               className="hidden"
             />
             <Button variant="outline" asChild>
@@ -175,13 +197,33 @@ export function MyDocuments() {
       {/* Resumes Section */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <FileText className="mr-2 h-5 w-5" />
-            Resumes
-          </CardTitle>
-          <CardDescription>
-            Manage your resume library and set your default resume
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center">
+                <FileText className="mr-2 h-5 w-5" />
+                Resumes
+              </CardTitle>
+              <CardDescription>
+                Manage your resume library and set your default resume
+              </CardDescription>
+            </div>
+            <div>
+              <input
+                type="file"
+                id="resume-upload"
+                multiple
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => handleFileUpload(e, 'resume')}
+                className="hidden"
+              />
+              <Button variant="outline" size="sm" asChild>
+                <label htmlFor="resume-upload" className="cursor-pointer">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Resume
+                </label>
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           {resumes.length > 0 ? (
@@ -207,13 +249,21 @@ export function MyDocuments() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="icon">
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <Download className="h-4 w-4" />
-                    </Button>
+                   <div className="flex items-center space-x-2">
+                     <Button 
+                       variant="ghost" 
+                       size="icon"
+                       onClick={() => handleView(doc)}
+                     >
+                       <Eye className="h-4 w-4" />
+                     </Button>
+                     <Button 
+                       variant="ghost" 
+                       size="icon"
+                       onClick={() => handleDownload(doc)}
+                     >
+                       <Download className="h-4 w-4" />
+                     </Button>
                     {!doc.isDefault && (
                       <Button 
                         variant="ghost" 
@@ -248,13 +298,33 @@ export function MyDocuments() {
       {/* Cover Letters Section */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center">
-            <Edit className="mr-2 h-5 w-5" />
-            Cover Letters
-          </CardTitle>
-          <CardDescription>
-            Keep track of your tailored cover letters for different applications
-          </CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="flex items-center">
+                <Edit className="mr-2 h-5 w-5" />
+                Cover Letters
+              </CardTitle>
+              <CardDescription>
+                Keep track of your tailored cover letters for different applications
+              </CardDescription>
+            </div>
+            <div>
+              <input
+                type="file"
+                id="cover-letter-upload"
+                multiple
+                accept=".pdf,.doc,.docx"
+                onChange={(e) => handleFileUpload(e, 'cover-letter')}
+                className="hidden"
+              />
+              <Button variant="outline" size="sm" asChild>
+                <label htmlFor="cover-letter-upload" className="cursor-pointer">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload Cover Letter
+                </label>
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           {coverLetters.length > 0 ? (
@@ -273,13 +343,21 @@ export function MyDocuments() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2">
-                    <Button variant="ghost" size="icon">
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <Download className="h-4 w-4" />
-                    </Button>
+                   <div className="flex items-center space-x-2">
+                     <Button 
+                       variant="ghost" 
+                       size="icon"
+                       onClick={() => handleView(doc)}
+                     >
+                       <Eye className="h-4 w-4" />
+                     </Button>
+                     <Button 
+                       variant="ghost" 
+                       size="icon"
+                       onClick={() => handleDownload(doc)}
+                     >
+                       <Download className="h-4 w-4" />
+                     </Button>
                     <Button variant="ghost" size="icon">
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -304,6 +382,39 @@ export function MyDocuments() {
           )}
         </CardContent>
       </Card>
+
+      {/* Document Viewer Dialog */}
+      <Dialog open={!!viewedDocument} onOpenChange={(open) => !open && setViewedDocument(null)}>
+        <DialogContent className="max-w-4xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle>{viewedDocument?.name}</DialogTitle>
+            <DialogDescription>
+              {viewedDocument?.type === 'resume' ? 'Resume' : 'Cover Letter'} • {viewedDocument?.size} • Modified {viewedDocument?.lastModified.toLocaleDateString()}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex-1 bg-muted/30 rounded-lg p-8 text-center">
+            <FileText className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+            <p className="text-lg font-semibold mb-2">Document Preview</p>
+            <p className="text-muted-foreground mb-6">
+              Preview functionality would show the document content here.
+              <br />
+              In a real application, this would display the PDF or document viewer.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Button 
+                onClick={() => viewedDocument && handleDownload(viewedDocument)}
+                className="bg-gradient-primary hover:opacity-90"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download
+              </Button>
+              <Button variant="outline" onClick={() => setViewedDocument(null)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
