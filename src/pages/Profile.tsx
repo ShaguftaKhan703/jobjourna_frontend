@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,18 +10,21 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from '@/context/ThemeContext';
 import { User, Settings, Bell, Download, Camera, Shield, CreditCard } from 'lucide-react';
 
 export function Profile() {
   const { authState } = useAuth();
   const { toast } = useToast();
+  const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   
   const [profile, setProfile] = useState({
     name: authState.user?.name || '',
     email: authState.user?.email || '',
     avatarUrl: '',
-    theme: 'dark',
     emailNotifications: true,
     subscriptionStatus: 'free',
     isVerified: false,
@@ -33,6 +37,23 @@ export function Profile() {
       toast({ title: "Profile updated", description: "Your changes have been saved." });
       setIsLoading(false);
     }, 1000);
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setProfile({ ...profile, avatarUrl: result });
+      };
+      reader.readAsDataURL(file);
+      toast({ title: "Avatar uploaded", description: "Your profile picture has been updated." });
+    }
+  };
+
+  const handleUpgradeClick = () => {
+    navigate('/subscription');
   };
 
   return (
@@ -61,7 +82,18 @@ export function Profile() {
                 </Avatar>
                 <div className="space-y-2">
                   <Label>Profile Picture</Label>
-                  <Button variant="outline" size="sm">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
                     <Camera className="mr-2 h-4 w-4" />
                     Change Avatar
                   </Button>
@@ -112,8 +144,8 @@ export function Profile() {
               <div className="space-y-2">
                 <Label htmlFor="theme">Theme Preference</Label>
                 <Select
-                  value={profile.theme}
-                  onValueChange={(value) => setProfile({...profile, theme: value})}
+                  value={theme}
+                  onValueChange={(value) => setTheme(value as 'light' | 'dark' | 'system')}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select theme" />
@@ -121,6 +153,7 @@ export function Profile() {
                   <SelectContent>
                     <SelectItem value="light">Light</SelectItem>
                     <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="system">System</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -162,7 +195,11 @@ export function Profile() {
                 </Badge>
               </div>
               {profile.subscriptionStatus === 'free' && (
-                <Button variant="default" className="w-full bg-gradient-primary">
+                <Button 
+                  variant="default" 
+                  className="w-full bg-gradient-primary"
+                  onClick={handleUpgradeClick}
+                >
                   Upgrade to Pro
                 </Button>
               )}
