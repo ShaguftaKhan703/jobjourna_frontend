@@ -106,11 +106,11 @@ export function Subscription() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-2xl md:text-4xl font-bold gradient-primary bg-clip-text text-transparent mb-4">
             Choose Your Journey
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             From starting out to going full automation mode — pick the plan that matches your job hunt ambitions.
           </p>
         </div>
@@ -133,7 +133,7 @@ export function Subscription() {
         </div>
 
         {/* Subscription Plans */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-12">
           {subscriptionPlans.map((plan) => {
             const IconComponent = plan.icon;
             const isCurrent = currentPlan === plan.id;
@@ -146,41 +146,41 @@ export function Subscription() {
                 } ${isCurrent ? plan.borderColor : ''}`}
               >
                 {plan.isPopular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">
+                  <div className="absolute -top-2 md:-top-3 left-1/2 transform -translate-x-1/2 z-10">
+                    <Badge className="bg-primary text-primary-foreground text-xs md:text-sm px-2 md:px-3 py-1">
                       Most Popular
                     </Badge>
                   </div>
                 )}
                 
-                <CardHeader className="text-center pb-4">
-                  <div className={`mx-auto p-3 rounded-full ${plan.bgColor} mb-4`}>
-                    <IconComponent className={`h-8 w-8 ${plan.color}`} />
+                <CardHeader className="text-center pb-4 px-4 md:px-6">
+                  <div className={`mx-auto p-2 md:p-3 rounded-full ${plan.bgColor} mb-3 md:mb-4`}>
+                    <IconComponent className={`h-6 w-6 md:h-8 md:w-8 ${plan.color}`} />
                   </div>
-                  <CardTitle className="text-xl font-bold mb-1">
+                  <CardTitle className="text-lg md:text-xl font-bold mb-1">
                     🌱 {plan.name}
                   </CardTitle>
-                  <CardDescription className="text-sm font-medium">
+                  <CardDescription className="text-xs md:text-sm font-medium">
                     {plan.subtitle}
                   </CardDescription>
-                  <div className="mt-4">
-                    <span className="text-3xl font-bold">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
+                  <div className="mt-3 md:mt-4">
+                    <span className="text-2xl md:text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground text-sm md:text-base">{plan.period}</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">
+                  <p className="text-xs md:text-sm text-muted-foreground mt-2">
                     {plan.description}
                   </p>
                 </CardHeader>
 
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 md:space-y-6 px-4 md:px-6">
                   {/* Features */}
                   <div>
-                    <h4 className="font-semibold mb-3 flex items-center">
+                    <h4 className="font-semibold mb-2 md:mb-3 flex items-center text-sm md:text-base">
                       ✅ Features:
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1 md:space-y-2">
                       {plan.features.map((feature, index) => (
-                        <li key={index} className="text-sm flex items-start">
+                        <li key={index} className="text-xs md:text-sm flex items-start">
                           <span className="text-green-500 mr-2 mt-0.5">•</span>
                           <span>{feature}</span>
                         </li>
@@ -190,19 +190,20 @@ export function Subscription() {
 
                   {/* Use Case */}
                   <div>
-                    <h4 className="font-semibold mb-2 flex items-center">
+                    <h4 className="font-semibold mb-2 flex items-center text-sm md:text-base">
                       🎯 Use Case:
                     </h4>
-                    <p className="text-sm text-muted-foreground italic">
+                    <p className="text-xs md:text-sm text-muted-foreground italic">
                       {plan.useCase}
                     </p>
                   </div>
 
                   {/* Action Button */}
                   <Button 
-                    className={`w-full ${isCurrent ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`w-full text-sm md:text-base ${isCurrent ? 'opacity-50 cursor-not-allowed' : ''}`}
                     variant={plan.isPopular ? 'default' : 'outline'}
                     disabled={isCurrent}
+                    size="sm"
                   >
                     {isCurrent ? 'Current Plan' : plan.buttonText}
                   </Button>
