@@ -7,6 +7,7 @@ import {
   Mail,
   Puzzle,
   User,
+  CreditCard,
   Menu,
   X,
 } from 'lucide-react';
@@ -20,6 +21,7 @@ const navigation = [
   { name: 'AI Assistant', href: '/ai-assistant', icon: Bot },
   { name: 'My Documents', href: '/my-documents', icon: FileText },
   { name: 'AI Cover Letter', href: '/ai-cover-letter', icon: PenTool },
+  { name: 'Subscription', href: '/subscription', icon: CreditCard },
   { name: 'Contact Us', href: '/contact-us', icon: Mail },
   { name: 'Extensions', href: '/extensions', icon: Puzzle },
   { name: 'Profile', href: '/profile', icon: User },

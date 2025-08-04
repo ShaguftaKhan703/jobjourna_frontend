@@ -10,6 +10,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { AIAssistant } from "./pages/AIAssistant";
 import { MyDocuments } from "./pages/MyDocuments";
 import { AICoverLetter } from "./pages/AICoverLetter";
+import { Subscription } from "./pages/Subscription";
 import { ContactUs } from "./pages/ContactUs";
 import { Extensions } from "./pages/Extensions";
 import { Profile } from "./pages/Profile";
@@ -32,6 +33,7 @@ const App = () => (
                 <Route path="/ai-assistant" element={<AIAssistant />} />
                 <Route path="/my-documents" element={<MyDocuments />} />
                 <Route path="/ai-cover-letter" element={<AICoverLetter />} />
+                <Route path="/subscription" element={<Subscription />} />
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/extensions" element={<Extensions />} />
                 <Route path="/profile" element={<Profile />} />
