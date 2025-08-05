@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { VirtualAssistantProvider } from "@/context/VirtualAssistantContext";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
+import { VirtualAssistant } from "@/components/VirtualAssistant";
 import { Dashboard } from "./pages/Dashboard";
 import { AIAssistant } from "./pages/AIAssistant";
 import { MyDocuments } from "./pages/MyDocuments";
@@ -22,26 +24,29 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <LayoutWrapper>
-              <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/ai-assistant" element={<AIAssistant />} />
-                <Route path="/my-documents" element={<MyDocuments />} />
-                <Route path="/ai-cover-letter" element={<AICoverLetter />} />
-                <Route path="/subscription" element={<Subscription />} />
-                <Route path="/contact-us" element={<ContactUs />} />
-                <Route path="/extensions" element={<Extensions />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </LayoutWrapper>
-          </BrowserRouter>
-        </TooltipProvider>
+        <VirtualAssistantProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <LayoutWrapper>
+                <Routes>
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/ai-assistant" element={<AIAssistant />} />
+                  <Route path="/my-documents" element={<MyDocuments />} />
+                  <Route path="/ai-cover-letter" element={<AICoverLetter />} />
+                  <Route path="/subscription" element={<Subscription />} />
+                  <Route path="/contact-us" element={<ContactUs />} />
+                  <Route path="/extensions" element={<Extensions />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <VirtualAssistant />
+              </LayoutWrapper>
+            </BrowserRouter>
+          </TooltipProvider>
+        </VirtualAssistantProvider>
       </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
