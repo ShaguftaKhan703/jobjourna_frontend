@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PenTool, Sparkles, Copy, Download, Save } from 'lucide-react';
+import { PenTool, Sparkles, Copy, Download, Save, Upload, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export function AICoverLetter() {
@@ -13,15 +13,35 @@ export function AICoverLetter() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedLetter, setGeneratedLetter] = useState('');
   
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeText, setResumeText] = useState('');
   const [formData, setFormData] = useState({
     jobTitle: '',
     company: '',
     jobDescription: '',
     tone: 'professional',
-    experience: '',
-    skills: '',
     motivation: '',
   });
+
+  const handleResumeUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setResumeFile(file);
+      
+      // Simulate resume parsing
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result as string;
+        setResumeText(text);
+        
+        toast({
+          title: "Resume uploaded",
+          description: "Your resume has been parsed and will be used to generate the cover letter.",
+        });
+      };
+      reader.readAsText(file);
+    }
+  };
 
   const handleGenerate = async () => {
     if (!formData.jobTitle || !formData.company) {
@@ -37,7 +57,7 @@ export function AICoverLetter() {
     
     // Simulate AI generation
     setTimeout(() => {
-      const mockLetter = generateMockCoverLetter(formData);
+      const mockLetter = generateMockCoverLetter(formData, resumeText);
       setGeneratedLetter(mockLetter);
       setIsGenerating(false);
       
@@ -48,12 +68,15 @@ export function AICoverLetter() {
     }, 3000);
   };
 
-  const generateMockCoverLetter = (data: typeof formData) => {
+  const generateMockCoverLetter = (data: typeof formData, resume: string) => {
+    const resumeSkills = resume ? "React, TypeScript, Node.js, Python" : "software development";
+    const resumeExperience = resume ? "5 years of full-stack development experience" : "software development";
+    
     return `Dear Hiring Manager,
 
 I am writing to express my strong interest in the ${data.jobTitle} position at ${data.company}. Your commitment to innovation and excellence aligns perfectly with my career aspirations and professional values.
 
-With my background in ${data.experience || 'software development'}, I bring a unique combination of technical expertise and ${data.skills || 'problem-solving abilities'} that would make me a valuable addition to your team. I am particularly drawn to this opportunity because ${data.motivation || 'of the company\'s reputation for fostering growth and innovation'}.
+With my background in ${resumeExperience}, I bring a unique combination of technical expertise and proven track record with ${resumeSkills} that would make me a valuable addition to your team. I am particularly drawn to this opportunity because ${data.motivation || 'of the company\'s reputation for fostering growth and innovation'}.
 
 ${data.jobDescription ? `Based on the job description, I understand you're looking for someone who can contribute to ${data.company}'s continued success. My experience has prepared me to tackle the challenges outlined in your posting and contribute meaningfully from day one.` : ''}
 
@@ -114,7 +137,45 @@ Sincerely,
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            {/* Resume Upload */}
+            <div className="space-y-2">
+              <Label htmlFor="resume">Upload Resume</Label>
+              <div className="relative">
+                <Input
+                  id="resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx,.txt"
+                  onChange={handleResumeUpload}
+                  className="hidden"
+                />
+                <Label
+                  htmlFor="resume"
+                  className="flex items-center justify-center w-full h-32 border-2 border-dashed border-input rounded-lg cursor-pointer hover:bg-accent/50 transition-colors"
+                >
+                  <div className="text-center space-y-2">
+                    {resumeFile ? (
+                      <>
+                        <FileText className="mx-auto h-8 w-8 text-primary" />
+                        <div>
+                          <p className="text-sm font-medium">{resumeFile.name}</p>
+                          <p className="text-xs text-muted-foreground">Resume uploaded successfully</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mx-auto h-8 w-8 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm font-medium">Upload your resume</p>
+                          <p className="text-xs text-muted-foreground">PDF, DOC, DOCX, or TXT files</p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </Label>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="jobTitle">Job Title *</Label>
                 <Input
@@ -158,27 +219,6 @@ Sincerely,
                 onChange={(e) => updateFormData('jobDescription', e.target.value)}
                 placeholder="Paste the job description here (optional)..."
                 rows={4}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="experience">Your Experience</Label>
-              <Textarea
-                id="experience"
-                value={formData.experience}
-                onChange={(e) => updateFormData('experience', e.target.value)}
-                placeholder="Briefly describe your relevant experience..."
-                rows={3}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="skills">Key Skills</Label>
-              <Input
-                id="skills"
-                value={formData.skills}
-                onChange={(e) => updateFormData('skills', e.target.value)}
-                placeholder="React, TypeScript, Problem-solving..."
               />
             </div>
 
@@ -231,21 +271,21 @@ Sincerely,
                   className="font-body text-sm leading-relaxed"
                 />
                 
-                <div className="flex items-center justify-between pt-4 border-t">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t gap-4">
                   <div className="text-sm text-muted-foreground">
                     {generatedLetter.split(' ').length} words • {generatedLetter.split('\n').length} paragraphs
                   </div>
                   
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="sm" onClick={handleCopy}>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button variant="outline" size="sm" onClick={handleCopy} className="w-full sm:w-auto">
                       <Copy className="mr-2 h-4 w-4" />
                       Copy
                     </Button>
-                    <Button variant="outline" size="sm" onClick={handleSave}>
+                    <Button variant="outline" size="sm" onClick={handleSave} className="w-full sm:w-auto">
                       <Save className="mr-2 h-4 w-4" />
                       Save
                     </Button>
-                    <Button size="sm" className="bg-gradient-primary hover:opacity-90">
+                    <Button size="sm" className="bg-gradient-primary hover:opacity-90 w-full sm:w-auto">
                       <Download className="mr-2 h-4 w-4" />
                       Download
                     </Button>
