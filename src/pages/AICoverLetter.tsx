@@ -271,21 +271,21 @@ Sincerely,
                   className="font-body text-sm leading-relaxed"
                 />
                 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t gap-4">
-                  <div className="text-sm text-muted-foreground">
+                <div className="space-y-4 pt-4 border-t">
+                  <div className="text-sm text-muted-foreground text-center sm:text-left">
                     {generatedLetter.split(' ').length} words • {generatedLetter.split('\n').length} paragraphs
                   </div>
                   
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button variant="outline" size="sm" onClick={handleCopy} className="w-full sm:w-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
+                    <Button variant="outline" size="sm" onClick={handleCopy} className="w-full">
                       <Copy className="mr-2 h-4 w-4" />
                       Copy
                     </Button>
-                    <Button variant="outline" size="sm" onClick={handleSave} className="w-full sm:w-auto">
+                    <Button variant="outline" size="sm" onClick={handleSave} className="w-full">
                       <Save className="mr-2 h-4 w-4" />
                       Save
                     </Button>
-                    <Button size="sm" className="bg-gradient-primary hover:opacity-90 w-full sm:w-auto">
+                    <Button size="sm" className="bg-gradient-primary hover:opacity-90 w-full">
                       <Download className="mr-2 h-4 w-4" />
                       Download
                     </Button>
