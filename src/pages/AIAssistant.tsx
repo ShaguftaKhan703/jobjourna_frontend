@@ -121,13 +121,13 @@ export function AIAssistant() {
       </Card>
 
       {/* Chat Interface */}
-      <Card className="flex flex-col h-[600px]">
+      <Card className="flex flex-col min-h-[400px] max-h-[80vh]">
         <CardHeader className="border-b">
           <CardTitle>Chat with AI Assistant</CardTitle>
         </CardHeader>
         
-        <CardContent className="flex-1 p-0">
-          <ScrollArea className="h-full p-6">
+        <CardContent className="flex-1 p-0 overflow-hidden">
+          <ScrollArea className="h-[calc(80vh-200px)] min-h-[300px] p-6">
             <div className="space-y-4">
               {messages.map((message) => (
                 <div
