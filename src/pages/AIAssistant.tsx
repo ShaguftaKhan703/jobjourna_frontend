@@ -121,73 +121,71 @@ export function AIAssistant() {
       </Card>
 
       {/* Chat Interface */}
-      <Card className="flex flex-col min-h-[400px] max-h-[80vh]">
+      <Card className="flex flex-col">
         <CardHeader className="border-b">
           <CardTitle>Chat with AI Assistant</CardTitle>
         </CardHeader>
         
-        <CardContent className="flex-1 p-0 overflow-hidden">
-          <ScrollArea className="h-[calc(80vh-200px)] min-h-[300px] p-6">
-            <div className="space-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  {message.sender === 'ai' && (
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="bg-gradient-primary text-white">
-                        <Bot className="h-4 w-4" />
-                      </AvatarFallback>
-                    </Avatar>
-                  )}
-                  
-                  <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
-                      message.sender === 'user'
-                        ? 'bg-primary text-primary-foreground ml-auto'
-                        : 'bg-muted'
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap text-sm">
-                      {message.content}
-                    </div>
-                    <div className="text-xs opacity-70 mt-2">
-                      {message.timestamp.toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
-                    </div>
-                  </div>
-                  
-                  {message.sender === 'user' && (
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback>
-                        <User className="h-4 w-4" />
-                      </AvatarFallback>
-                    </Avatar>
-                  )}
-                </div>
-              ))}
-              
-              {isLoading && (
-                <div className="flex gap-3 justify-start">
+        <CardContent className="p-6">
+          <div className="space-y-4">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                {message.sender === 'ai' && (
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-gradient-primary text-white">
                       <Bot className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
-                  <div className="bg-muted rounded-lg p-3">
-                    <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse"></div>
-                      <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse [animation-delay:0.2s]"></div>
-                      <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse [animation-delay:0.4s]"></div>
-                    </div>
+                )}
+                
+                <div
+                  className={`max-w-[80%] rounded-lg p-3 ${
+                    message.sender === 'user'
+                      ? 'bg-primary text-primary-foreground ml-auto'
+                      : 'bg-muted'
+                  }`}
+                >
+                  <div className="whitespace-pre-wrap text-sm">
+                    {message.content}
+                  </div>
+                  <div className="text-xs opacity-70 mt-2">
+                    {message.timestamp.toLocaleTimeString([], { 
+                      hour: '2-digit', 
+                      minute: '2-digit' 
+                    })}
                   </div>
                 </div>
-              )}
-            </div>
-          </ScrollArea>
+                
+                {message.sender === 'user' && (
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback>
+                      <User className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+              </div>
+            ))}
+            
+            {isLoading && (
+              <div className="flex gap-3 justify-start">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-gradient-primary text-white">
+                    <Bot className="h-4 w-4" />
+                  </AvatarFallback>
+                </Avatar>
+                <div className="bg-muted rounded-lg p-3">
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse [animation-delay:0.2s]"></div>
+                    <div className="w-2 h-2 bg-current opacity-60 rounded-full animate-pulse [animation-delay:0.4s]"></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </CardContent>
         
         <div className="border-t p-4">
