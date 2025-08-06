@@ -208,7 +208,7 @@ export function VirtualAssistant() {
     return (
       <Button
         onClick={showAssistant}
-        className="fixed bottom-6 right-6 rounded-full w-14 h-14 bg-gradient-primary hover:opacity-90 shadow-lg shadow-primary/25 z-50"
+        className="fixed bottom-6 right-6 rounded-full w-14 h-14 bg-gradient-to-br from-velvet-rose to-sapphire-blue hover:opacity-90 shadow-lg shadow-primary/25 z-50"
         size="lg"
       >
         <Bot className="h-6 w-6" />
@@ -220,7 +220,7 @@ export function VirtualAssistant() {
   if (isMinimized) {
     return (
       <Card className="fixed bottom-6 right-6 w-72 z-50 shadow-xl">
-        <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-primary rounded-t-lg">
+        <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-to-br from-velvet-rose to-sapphire-blue rounded-t-lg">
           <div className="flex items-center gap-2">
             <Avatar className="w-8 h-8">
               <AvatarFallback className="bg-white/20 text-white text-sm">
@@ -259,7 +259,7 @@ export function VirtualAssistant() {
   return (
     <Card className="fixed bottom-6 right-6 w-96 h-[500px] z-50 shadow-xl flex flex-col">
       {/* Header */}
-      <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-primary rounded-t-lg shrink-0">
+      <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-to-br from-velvet-rose to-sapphire-blue rounded-t-lg shrink-0">
         <div className="flex items-center gap-2">
           <Avatar className="w-8 h-8">
             <AvatarFallback className="bg-white/20 text-white">
@@ -308,7 +308,7 @@ export function VirtualAssistant() {
               >
                 {message.sender === 'jobsy' && (
                   <Avatar className="w-8 h-8 shrink-0">
-                    <AvatarFallback className="bg-gradient-primary text-white text-xs">
+                    <AvatarFallback className="bg-gradient-to-br from-velvet-rose to-sapphire-blue text-white text-xs">
                       <Bot className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
@@ -354,7 +354,7 @@ export function VirtualAssistant() {
             {isTyping && (
               <div className="flex gap-3 justify-start">
                 <Avatar className="w-8 h-8 shrink-0">
-                  <AvatarFallback className="bg-gradient-primary text-white text-xs">
+                  <AvatarFallback className="bg-gradient-to-br from-velvet-rose to-sapphire-blue text-white text-xs">
                     <Bot className="h-4 w-4" />
                   </AvatarFallback>
                 </Avatar>
@@ -388,7 +388,7 @@ export function VirtualAssistant() {
             onClick={handleSendMessage}
             size="sm"
             disabled={!inputValue.trim()}
-            className="bg-gradient-primary hover:opacity-90"
+            className="bg-gradient-to-br from-velvet-rose to-sapphire-blue hover:opacity-90"
           >
             <Send className="h-4 w-4" />
           </Button>
