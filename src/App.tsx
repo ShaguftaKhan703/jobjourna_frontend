@@ -24,11 +24,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AuthProvider>
-        <VirtualAssistantProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <VirtualAssistantProvider>
               <LayoutWrapper>
                 <Routes>
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
@@ -44,9 +44,9 @@ const App = () => (
                 </Routes>
                 <VirtualAssistant />
               </LayoutWrapper>
-            </BrowserRouter>
-          </TooltipProvider>
-        </VirtualAssistantProvider>
+            </VirtualAssistantProvider>
+          </BrowserRouter>
+        </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
