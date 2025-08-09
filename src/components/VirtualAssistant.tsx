@@ -10,7 +10,6 @@ import {
   Minimize2, 
   Maximize2, 
   Send, 
-  Bot, 
   User,
   Sparkles
 } from 'lucide-react';
@@ -211,7 +210,7 @@ export function VirtualAssistant() {
         className="fixed bottom-6 right-6 rounded-full w-14 h-14 bg-gradient-to-br from-velvet-rose to-sapphire-blue hover:opacity-90 shadow-lg shadow-primary/25 z-50"
         size="lg"
       >
-        <Bot className="h-6 w-6" />
+        <Sparkles className="h-6 w-6" />
       </Button>
     );
   }
@@ -224,7 +223,7 @@ export function VirtualAssistant() {
           <div className="flex items-center gap-2">
             <Avatar className="w-8 h-8">
               <AvatarFallback className="bg-white/20 text-white text-sm">
-                <Bot className="h-4 w-4" />
+                <Sparkles className="h-4 w-4" />
               </AvatarFallback>
             </Avatar>
             <div className="text-white">
@@ -263,7 +262,7 @@ export function VirtualAssistant() {
         <div className="flex items-center gap-2">
           <Avatar className="w-8 h-8">
             <AvatarFallback className="bg-white/20 text-white">
-              <Bot className="h-4 w-4" />
+              <Sparkles className="h-4 w-4" />
             </AvatarFallback>
           </Avatar>
           <div className="text-white">
@@ -309,7 +308,7 @@ export function VirtualAssistant() {
                 {message.sender === 'jobsy' && (
                   <Avatar className="w-8 h-8 shrink-0">
                     <AvatarFallback className="bg-gradient-to-br from-velvet-rose to-sapphire-blue text-white text-xs">
-                      <Bot className="h-4 w-4" />
+                      <Sparkles className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
                 )}
@@ -355,7 +354,7 @@ export function VirtualAssistant() {
               <div className="flex gap-3 justify-start">
                 <Avatar className="w-8 h-8 shrink-0">
                   <AvatarFallback className="bg-gradient-to-br from-velvet-rose to-sapphire-blue text-white text-xs">
-                    <Bot className="h-4 w-4" />
+                    <Sparkles className="h-4 w-4" />
                   </AvatarFallback>
                 </Avatar>
                 <div className="bg-muted rounded-lg p-3 text-sm">
