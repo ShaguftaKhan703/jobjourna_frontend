@@ -16,6 +16,7 @@ import { Subscription } from "./pages/Subscription";
 import { ContactUs } from "./pages/ContactUs";
 import { Extensions } from "./pages/Extensions";
 import { Profile } from "./pages/Profile";
+import { AgenticMode } from "./pages/AgenticMode";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/ai-assistant" element={<AIAssistant />} />
+                  <Route path="/agentic-mode" element={<AgenticMode />} />
                   <Route path="/my-documents" element={<MyDocuments />} />
                   <Route path="/ai-cover-letter" element={<AICoverLetter />} />
                   <Route path="/subscription" element={<Subscription />} />

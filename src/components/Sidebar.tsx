@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   Bot,
+  Brain,
   FileText,
   PenTool,
   Mail,
@@ -19,6 +20,7 @@ import { useAuth } from '@/context/AuthContext';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'AI Assistant', href: '/ai-assistant', icon: Bot },
+  { name: 'Agentic Mode (v3)', href: '/agentic-mode', icon: Brain },
   { name: 'My Documents', href: '/my-documents', icon: FileText },
   { name: 'AI Cover Letter', href: '/ai-cover-letter', icon: PenTool },
   { name: 'Subscription', href: '/subscription', icon: CreditCard },
