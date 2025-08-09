@@ -11,7 +11,9 @@ import {
   Maximize2, 
   Send, 
   User,
-  Sparkles
+  Sparkles,
+  Expand,
+  Shrink
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -38,6 +40,7 @@ export function VirtualAssistant() {
     status: 'applied' as const
   });
   const [currentStep, setCurrentStep] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -235,7 +238,7 @@ export function VirtualAssistant() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={showAssistant}
+              onClick={() => { setIsExpanded(true); showAssistant(); }}
               className="h-8 w-8 p-0 text-white hover:bg-white/20"
             >
               <Maximize2 className="h-4 w-4" />
@@ -256,7 +259,7 @@ export function VirtualAssistant() {
 
   // Full chat interface
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] z-50 shadow-xl flex flex-col">
+    <Card className={cn("fixed bottom-6 right-6 z-50 shadow-xl flex flex-col", isExpanded ? "w-[min(90vw,700px)] h-[min(85vh,720px)]" : "w-96 h-[500px]")}>
       {/* Header */}
       <CardHeader className="flex flex-row items-center justify-between p-4 bg-gradient-to-br from-velvet-rose to-sapphire-blue rounded-t-lg shrink-0">
         <div className="flex items-center gap-2">
@@ -277,8 +280,22 @@ export function VirtualAssistant() {
           <Button
             variant="ghost"
             size="sm"
+            onClick={() => setIsExpanded((v) => !v)}
+            className="h-8 w-8 p-0 text-white hover:bg-white/20"
+            aria-label={isExpanded ? "Shrink Jobsy" : "Expand Jobsy"}
+          >
+            {isExpanded ? (
+              <Shrink className="h-4 w-4" />
+            ) : (
+              <Expand className="h-4 w-4" />
+            )}
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={minimizeAssistant}
             className="h-8 w-8 p-0 text-white hover:bg-white/20"
+            aria-label="Minimize Jobsy"
           >
             <Minimize2 className="h-4 w-4" />
           </Button>
@@ -287,6 +304,7 @@ export function VirtualAssistant() {
             size="sm"
             onClick={hideAssistant}
             className="h-8 w-8 p-0 text-white hover:bg-white/20"
+            aria-label="Close Jobsy"
           >
             <X className="h-4 w-4" />
           </Button>
