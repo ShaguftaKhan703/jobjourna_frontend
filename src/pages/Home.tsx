@@ -93,9 +93,9 @@ export function Home({ onNavigateToAuth }: HomeProps) {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <h1 className="font-heading text-xl font-bold gradient-primary bg-clip-text text-transparent">
+              <div className="font-heading text-xl font-bold gradient-primary bg-clip-text text-transparent">
                 Job Journal
-              </h1>
+              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -176,13 +176,14 @@ export function Home({ onNavigateToAuth }: HomeProps) {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 lg:py-32">
+      <section className="relative overflow-hidden py-20 lg:py-32">
+        <div className="absolute inset-0 -z-10 gradient-primary opacity-25 blur-3xl" aria-hidden="true" />
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading text-4xl lg:text-6xl font-bold mb-6">
+            <h1 className="font-heading text-4xl lg:text-6xl font-bold mb-6 animate-fade-in">
               Transform Your <span className="gradient-primary bg-clip-text text-transparent">Job Search</span> Journey
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
               Track applications, analyze progress, and land your dream job with the most powerful job search management platform.
             </p>
             
@@ -190,7 +191,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
               <Button 
                 size="lg" 
                 onClick={onNavigateToAuth}
-                className="gradient-primary text-white px-8 py-3 text-lg"
+                className="gradient-primary text-white px-8 py-3 text-lg hover-scale shadow-elegant"
               >
                 Start Your Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -199,7 +200,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                 size="lg" 
                 variant="outline"
                 onClick={() => scrollToSection('about')}
-                className="px-8 py-3 text-lg"
+                className="px-8 py-3 text-lg hover-scale"
               >
                 Learn More
               </Button>
@@ -207,7 +208,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
 
             {/* Quote Carousel */}
             <div className="max-w-2xl mx-auto">
-              <blockquote className="text-lg font-medium text-muted-foreground italic">
+              <blockquote className="text-lg font-medium text-muted-foreground italic animate-fade-in">
                 "{quotes[Math.floor(Math.random() * quotes.length)]}"
               </blockquote>
             </div>
@@ -229,9 +230,9 @@ export function Home({ onNavigateToAuth }: HomeProps) {
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center shadow-elegant">
+              <Card key={index} className="text-center shadow-card transition-transform hover:-translate-y-1 hover-scale hover:shadow-elegant animate-fade-in">
                 <CardContent className="pt-8">
-                  <div className="gradient-primary w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 text-white">
+                  <div className="gradient-primary w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4 text-white shadow-elegant">
                     {feature.icon}
                   </div>
                   <h4 className="font-heading text-xl font-semibold mb-3">{feature.title}</h4>
@@ -246,7 +247,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
       {/* About Us Section */}
       <section id="about" className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">About Job Journal</h3>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-left">
@@ -271,7 +272,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                   </Badge>
                 </div>
               </div>
-              <div className="gradient-secondary rounded-lg p-8 text-center">
+              <div className="gradient-secondary rounded-lg p-8 text-center transition-transform hover-scale hover:-translate-y-1">
                 <h4 className="font-heading text-2xl font-bold mb-4">Our Mission</h4>
                 <p className="text-muted-foreground">
                   To empower job seekers with the tools and insights they need to navigate their career journey with confidence and clarity.
@@ -285,7 +286,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
       {/* Community Section */}
       <section id="community" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 text-center">
-          <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">Join Our Community</h3>
+          <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8 animate-fade-in">Join Our Community</h3>
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Connect with thousands of job seekers, share experiences, and get support from our vibrant community.
           </p>
@@ -303,7 +304,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
               <div className="text-muted-foreground">Community Support</div>
             </div>
           </div>
-          <Button size="lg" onClick={onNavigateToAuth} className="gradient-primary text-white">
+          <Button size="lg" onClick={onNavigateToAuth} className="gradient-primary text-white hover-scale shadow-elegant">
             Join the Community
           </Button>
         </div>
@@ -313,11 +314,11 @@ export function Home({ onNavigateToAuth }: HomeProps) {
       <section id="newsletter" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">Stay Updated</h3>
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4 animate-fade-in">Stay Updated</h3>
             <p className="text-xl text-muted-foreground mb-8">
               Get the latest job market insights, career tips, and platform updates delivered to your inbox.
             </p>
-            <Card className="shadow-elegant">
+            <Card className="shadow-card animate-fade-in">
               <CardContent className="p-8">
                 <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
                   <Input
@@ -328,7 +329,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                     required
                     className="flex-1"
                   />
-                  <Button type="submit" className="gradient-primary text-white">
+                  <Button type="submit" className="gradient-primary text-white hover-scale shadow-elegant">
                     Subscribe
                   </Button>
                 </form>
@@ -353,7 +354,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="shadow-elegant">
+              <Card key={index} className="shadow-card transition-transform hover:-translate-y-1 hover-scale hover:shadow-elegant animate-fade-in">
                 <CardContent className="p-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -387,25 +388,25 @@ export function Home({ onNavigateToAuth }: HomeProps) {
             <div>
               <h5 className="font-semibold mb-4">Product</h5>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Extensions</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Pricing</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Extensions</a></li>
               </ul>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Company</h5>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">About</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Careers</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Contact</a></li>
               </ul>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Support</h5>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Help Center</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="story-link hover:text-primary transition-colors">Terms of Service</a></li>
               </ul>
             </div>
           </div>
