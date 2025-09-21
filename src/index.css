@@ -7,11 +7,11 @@
 
 @layer base {
   :root {
-    /* Brand Color Palette - Lavender & Purple Theme */
-    --velvet-rose: 275 65% 70%;
-    --lilac-blush: 260 45% 85%;
-    --sapphire-blue: 280 80% 65%;
-    --dusty-coral: 250 50% 80%;
+    /* Brand Color Palette - Radiant Lavender & Purple Theme */
+    --velvet-rose: 319 65% 75%;
+    --lilac-blush: 320 55% 80%;
+    --sapphire-blue: 220 85% 68%;
+    --dusty-coral: 15 75% 70%;
     
     /* Job Status Colors */
     --status-applied: 125 39% 65%;
