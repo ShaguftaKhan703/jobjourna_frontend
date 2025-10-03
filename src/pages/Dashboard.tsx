@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { JobCard } from '@/components/JobCard';
 import { AddJobModal } from '@/components/AddJobModal';
 import { Job, JobFormData, JOB_STATUSES } from '@/types/job';
@@ -21,6 +22,8 @@ export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingJob, setEditingJob] = useState<Job | undefined>();
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState<string | null>(null);
   
   // Mock data - in a real app, this would come from an API
   const [jobs, setJobs] = useState<Job[]>([
@@ -108,12 +111,21 @@ export function Dashboard() {
     setIsModalOpen(false);
   };
 
-  const handleDeleteJob = (jobId: string) => {
-    setJobs(prev => prev.filter(job => job.id !== jobId));
+  const confirmDeleteJob = (jobId: string) => {
+    setJobToDelete(jobId);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteJob = () => {
+    if (!jobToDelete) return;
+    
+    setJobs(prev => prev.filter(job => job.id !== jobToDelete));
     toast({
       title: "Job deleted",
       description: "The job application has been removed from your tracker.",
     });
+    setDeleteDialogOpen(false);
+    setJobToDelete(null);
   };
 
   const openEditModal = (job: Job) => {
@@ -258,7 +270,7 @@ export function Dashboard() {
                     key={job.id}
                     job={job}
                     onEdit={openEditModal}
-                    onDelete={handleDeleteJob}
+                    onDelete={confirmDeleteJob}
                     onView={openEditModal}
                   />
                 ))}
@@ -313,7 +325,7 @@ export function Dashboard() {
                                   Edit
                                 </DropdownMenuItem>
                                 <DropdownMenuItem 
-                                  onClick={() => handleDeleteJob(job.id)}
+                                  onClick={() => confirmDeleteJob(job.id)}
                                   className="text-destructive"
                                 >
                                   <Trash2 className="mr-2 h-4 w-4" />
@@ -360,6 +372,24 @@ export function Dashboard() {
         onSave={editingJob ? handleEditJob : handleAddJob}
         job={editingJob}
       />
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete this job application. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setJobToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteJob} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
