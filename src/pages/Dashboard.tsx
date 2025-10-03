@@ -3,11 +3,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { JobCard } from '@/components/JobCard';
 import { AddJobModal } from '@/components/AddJobModal';
 import { Job, JobFormData, JOB_STATUSES } from '@/types/job';
-import { Plus, Search, TrendingUp, Briefcase, Clock, CheckCircle } from 'lucide-react';
+import { Plus, Search, TrendingUp, Briefcase, Clock, CheckCircle, MoreVertical, Eye, Pencil, Trash2, LayoutGrid, List } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { formatDistanceToNow } from 'date-fns';
 
 export function Dashboard() {
   const { toast } = useToast();
@@ -15,6 +20,7 @@ export function Dashboard() {
   const [statusFilter, setStatusFilter] = useState('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingJob, setEditingJob] = useState<Job | undefined>();
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   
   // Mock data - in a real app, this would come from an API
   const [jobs, setJobs] = useState<Job[]>([
@@ -225,21 +231,104 @@ export function Dashboard() {
                 ))}
               </SelectContent>
             </Select>
+            <div className="flex gap-2">
+              <Button
+                variant={viewMode === 'grid' ? 'default' : 'outline'}
+                size="icon"
+                onClick={() => setViewMode('grid')}
+              >
+                <LayoutGrid className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'table' ? 'default' : 'outline'}
+                size="icon"
+                onClick={() => setViewMode('table')}
+              >
+                <List className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
 
-          {/* Jobs Grid */}
+          {/* Jobs View */}
           {filteredJobs.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {filteredJobs.map((job) => (
-                <JobCard
-                  key={job.id}
-                  job={job}
-                  onEdit={openEditModal}
-                  onDelete={handleDeleteJob}
-                  onView={openEditModal}
-                />
-              ))}
-            </div>
+            viewMode === 'grid' ? (
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredJobs.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    onEdit={openEditModal}
+                    onDelete={handleDeleteJob}
+                    onView={openEditModal}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-md border">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Job Title</TableHead>
+                      <TableHead>Company</TableHead>
+                      <TableHead>Location</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Source</TableHead>
+                      <TableHead>Applied</TableHead>
+                      <TableHead>Salary</TableHead>
+                      <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredJobs.map((job) => {
+                      const statusInfo = JOB_STATUSES.find(s => s.value === job.status);
+                      return (
+                        <TableRow key={job.id}>
+                          <TableCell className="font-medium">{job.title}</TableCell>
+                          <TableCell>{job.company}</TableCell>
+                          <TableCell>{job.location || '-'}</TableCell>
+                          <TableCell>
+                            <Badge className={statusInfo?.color}>
+                              {statusInfo?.label}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{job.source}</TableCell>
+                          <TableCell>
+                            {formatDistanceToNow(job.applicationDate, { addSuffix: true })}
+                          </TableCell>
+                          <TableCell>{job.salary || '-'}</TableCell>
+                          <TableCell className="text-right">
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon">
+                                  <MoreVertical className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => openEditModal(job)}>
+                                  <Eye className="mr-2 h-4 w-4" />
+                                  View
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => openEditModal(job)}>
+                                  <Pencil className="mr-2 h-4 w-4" />
+                                  Edit
+                                </DropdownMenuItem>
+                                <DropdownMenuItem 
+                                  onClick={() => handleDeleteJob(job.id)}
+                                  className="text-destructive"
+                                >
+                                  <Trash2 className="mr-2 h-4 w-4" />
+                                  Delete
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+            )
           ) : (
             <div className="text-center py-12">
               <Briefcase className="mx-auto h-12 w-12 text-muted-foreground/50" />
