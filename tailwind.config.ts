@@ -76,7 +76,8 @@ export default {
 			fontFamily: {
 				'heading': ['DM Serif Display', 'serif'],
 				'body': ['Inter', 'sans-serif'],
-				'accent': ['Quicksand', 'sans-serif']
+				'accent': ['Quicksand', 'sans-serif'],
+				'playfair': ['Playfair Display', 'serif']
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',

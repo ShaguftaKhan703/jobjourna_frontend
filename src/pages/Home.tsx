@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import { 
   Search, 
   Target, 
@@ -14,10 +15,13 @@ import {
   X,
   Users,
   TrendingUp,
-  Shield
+  Shield,
+  Sparkles,
+  Heart
  } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import founderVisionImage from '@/assets/founder-vision-illustration.jpg';
 
 interface HomeProps {
   onNavigateToAuth: () => void;
@@ -240,6 +244,151 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story & Founder's Vision Section */}
+      <section className="py-32 relative overflow-hidden">
+        {/* Elegant background gradient */}
+        <div className="absolute inset-0 -z-10 gradient-secondary opacity-20 blur-3xl" aria-hidden="true" />
+        
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Our Story */}
+            <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+              {/* Left: Text Content */}
+              <div className="space-y-8 animate-fade-in">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Heart className="h-5 w-5" />
+                    <span className="text-sm font-semibold tracking-wider uppercase">Our Story</span>
+                  </div>
+                  <h2 className="font-playfair text-4xl lg:text-5xl font-bold leading-tight">
+                    Building clarity, calm, and confidence in your career journey.
+                  </h2>
+                </div>
+                
+                <Separator className="my-8 bg-primary/20" />
+                
+                <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+                  <p>
+                    Job Journal was born from a simple realization — job searching is more than a process; it's an emotional journey.
+                  </p>
+                  <p>
+                    Our founder experienced firsthand how stressful and scattered the job hunt can feel — endless tabs, lost notes, forgotten follow-ups.
+                  </p>
+                  <p>
+                    So she built Job Journal, not as another tracker, but as a <span className="text-foreground font-semibold">career companion</span> — 
+                    a calm, intelligent space where you can organize, reflect, and grow through every step of your professional path.
+                  </p>
+                </div>
+
+                <blockquote className="border-l-4 border-primary pl-6 py-4 my-8 italic text-xl font-playfair text-foreground">
+                  "I wanted to create something that feels human — a digital journal that listens, guides, and celebrates progress. 
+                  Because finding a job isn't just about applying — it's about becoming."
+                </blockquote>
+              </div>
+
+              {/* Right: Image */}
+              <div className="relative animate-fade-in">
+                <div className="relative rounded-2xl overflow-hidden shadow-elegant">
+                  <img 
+                    src={founderVisionImage} 
+                    alt="Elegant journal symbolizing career reflection and growth"
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* Decorative floating elements */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full gradient-primary opacity-30 blur-2xl" aria-hidden="true" />
+                  <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-primary/20 blur-3xl" aria-hidden="true" />
+                </div>
+              </div>
+            </div>
+
+            {/* Founder's Vision */}
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left: Image (reversed order on desktop) */}
+              <div className="relative animate-fade-in order-2 lg:order-1">
+                <Card className="shadow-elegant bg-gradient-to-br from-card to-muted/30 border-primary/10">
+                  <CardContent className="p-12">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-2 text-primary mb-6">
+                        <Sparkles className="h-5 w-5" />
+                        <span className="text-sm font-semibold tracking-wider uppercase">Our Promise</span>
+                      </div>
+                      
+                      <h3 className="font-playfair text-2xl font-bold mb-6">To help you stay:</h3>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+                          <div>
+                            <div className="font-semibold text-foreground">Organized</div>
+                            <div className="text-muted-foreground">Every application, resume, and note in one place.</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+                          <div>
+                            <div className="font-semibold text-foreground">Motivated</div>
+                            <div className="text-muted-foreground">Guided gently by an AI that understands your journey.</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 rounded-full bg-primary mt-2" />
+                          <div>
+                            <div className="font-semibold text-foreground">Empowered</div>
+                            <div className="text-muted-foreground">With insights that help you grow, not just apply.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Right: Vision Content */}
+              <div className="space-y-8 animate-fade-in order-1 lg:order-2">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Sparkles className="h-5 w-5" />
+                    <span className="text-sm font-semibold tracking-wider uppercase">Founder's Vision</span>
+                  </div>
+                  <h2 className="font-playfair text-4xl lg:text-5xl font-bold leading-tight">
+                    Where ambition meets peace of mind
+                  </h2>
+                </div>
+                
+                <Separator className="my-8 bg-primary/20" />
+                
+                <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+                  <p>
+                    At Job Journal, we believe clarity and compassion should guide every career move.
+                  </p>
+                  <p>
+                    Our mission is to turn job searching into a <span className="text-foreground font-semibold">mindful experience</span> — 
+                    powered by AI, designed with empathy, and built for growth.
+                  </p>
+                  <p>
+                    Job Journal is where ambition meets peace of mind — where technology doesn't overwhelm, it empowers.
+                  </p>
+                  <p className="text-foreground font-semibold">
+                    We're creating not just a product, but a feeling: a sense of progress, calm, and confidence every time you log in.
+                  </p>
+                </div>
+
+                <div className="pt-8">
+                  <Button 
+                    size="lg" 
+                    onClick={onNavigateToAuth}
+                    className="gradient-primary text-white px-10 py-6 text-lg hover-scale shadow-elegant group"
+                  >
+                    Start Your Journey
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
