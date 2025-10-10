@@ -121,8 +121,8 @@ export function Dashboard() {
     
     setJobs(prev => prev.filter(job => job.id !== jobToDelete));
     toast({
-      title: "Job deleted",
-      description: "The job application has been removed from your tracker.",
+      title: "Step removed",
+      description: "This chapter has been removed from your journey.",
     });
     setDeleteDialogOpen(false);
     setJobToDelete(null);
@@ -144,67 +144,67 @@ export function Dashboard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="font-heading text-3xl font-bold">Dashboard</h1>
-            <p className="text-muted-foreground text-lg">
-              Track and manage your job applications
+            <h1 className="font-playfair text-4xl font-bold">Your Career Journal</h1>
+            <p className="text-muted-foreground text-lg mt-2">
+              Every application is a step forward in your journey
             </p>
           </div>
-          <Button onClick={openAddModal} className="bg-gradient-primary hover:opacity-90">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Job
+          <Button onClick={openAddModal} className="bg-gradient-primary hover:opacity-90 rounded-xl px-6 py-6 shadow-elegant hover:shadow-xl transition-all">
+            <Plus className="mr-2 h-5 w-5" />
+            Add a Step
           </Button>
         </div>
 
         {/* Statistics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
+          <Card className="rounded-2xl shadow-card hover:shadow-elegant transition-all duration-300">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Applications</CardTitle>
+              <CardTitle className="text-sm font-medium">Journey Steps</CardTitle>
               <Briefcase className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.total}</div>
-              <p className="text-xs text-muted-foreground">
-                Active job applications
+              <div className="text-3xl font-bold font-playfair">{stats.total}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Opportunities explored
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="rounded-2xl shadow-card hover:shadow-elegant transition-all duration-300">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Applied</CardTitle>
+              <CardTitle className="text-sm font-medium">In Review</CardTitle>
               <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-sapphire-blue">{stats.applied}</div>
-              <p className="text-xs text-muted-foreground">
-                Waiting for response
+              <div className="text-3xl font-bold font-playfair text-sapphire-blue">{stats.applied}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Awaiting their reply
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="rounded-2xl shadow-card hover:shadow-elegant transition-all duration-300">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Interviewing</CardTitle>
+              <CardTitle className="text-sm font-medium">Conversations</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-dusty-coral">{stats.interviewing}</div>
-              <p className="text-xs text-muted-foreground">
-                In progress
+              <div className="text-3xl font-bold font-playfair text-dusty-coral">{stats.interviewing}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Active interviews
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="rounded-2xl shadow-card hover:shadow-elegant transition-all duration-300">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Offers</CardTitle>
+              <CardTitle className="text-sm font-medium">Opportunities</CardTitle>
               <CheckCircle className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-velvet-rose">{stats.offers}</div>
-              <p className="text-xs text-muted-foreground">
-                Received offers
+              <div className="text-3xl font-bold font-playfair text-velvet-rose">{stats.offers}</div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Offers received
               </p>
             </CardContent>
           </Card>
@@ -212,22 +212,22 @@ export function Dashboard() {
       </div>
 
       {/* Filters and Search */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Job Applications</CardTitle>
-          <CardDescription>
-            Manage and track your job application progress
+      <Card className="rounded-2xl shadow-card">
+        <CardHeader className="p-8">
+          <CardTitle className="font-playfair text-2xl">Your Applications</CardTitle>
+          <CardDescription className="text-base mt-2">
+            Every entry tells a story of growth and possibility
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <CardContent className="p-8">
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search jobs or companies..."
+                placeholder="Search by role or company..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-12 rounded-xl h-12"
               />
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -342,19 +342,26 @@ export function Dashboard() {
               </div>
             )
           ) : (
-            <div className="text-center py-12">
-              <Briefcase className="mx-auto h-12 w-12 text-muted-foreground/50" />
-              <h3 className="mt-4 text-lg font-semibold">No jobs found</h3>
-              <p className="text-muted-foreground">
+            <div className="text-center py-16 px-6">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
+                <Briefcase className="h-10 w-10 text-primary/70" />
+              </div>
+              <h3 className="font-playfair text-2xl font-semibold mb-3">
                 {searchTerm || statusFilter !== 'all' 
-                  ? 'Try adjusting your search or filters'
-                  : 'Add your first job application to get started'
+                  ? 'No matches found'
+                  : 'Your journal is ready to begin 🌿'
+                }
+              </h3>
+              <p className="text-muted-foreground text-lg max-w-md mx-auto mb-6">
+                {searchTerm || statusFilter !== 'all' 
+                  ? 'Try adjusting your search or exploring different filters'
+                  : 'Every great journey starts with a single step. Add your first application and watch your career story unfold.'
                 }
               </p>
               {!searchTerm && statusFilter === 'all' && (
-                <Button onClick={openAddModal} className="mt-4 bg-gradient-primary hover:opacity-90">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add Your First Job
+                <Button onClick={openAddModal} className="bg-gradient-primary hover:opacity-90 rounded-xl px-8 py-6 text-base shadow-elegant hover:shadow-xl transition-all">
+                  <Plus className="mr-2 h-5 w-5" />
+                  Begin Your Journey
                 </Button>
               )}
             </div>
@@ -375,17 +382,17 @@ export function Dashboard() {
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className="rounded-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This will permanently delete this job application. This action cannot be undone.
+            <AlertDialogTitle className="font-playfair text-2xl">Remove this step?</AlertDialogTitle>
+            <AlertDialogDescription className="text-base">
+              This will remove this application from your journey. You can always add it back if you change your mind.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setJobToDelete(null)}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDeleteJob} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              Delete
+            <AlertDialogCancel onClick={() => setJobToDelete(null)} className="rounded-xl">Keep It</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteJob} className="bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-xl">
+              Remove
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

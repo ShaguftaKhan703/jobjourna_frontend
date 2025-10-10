@@ -22,14 +22,14 @@ export function JobCard({ job, onEdit, onDelete, onView }: JobCardProps) {
   const status = JOB_STATUSES.find(s => s.value === job.status);
   
   return (
-    <Card className="group hover:shadow-elegant transition-all duration-300 border-l-4 border-l-primary/20 hover:border-l-primary cursor-pointer">
-      <CardHeader className="pb-3">
+    <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-primary/20 hover:border-l-primary cursor-pointer rounded-2xl hover:scale-[1.02]">
+      <CardHeader className="pb-4 p-8">
         <div className="flex items-start justify-between">
-          <div className="space-y-1 flex-1 min-w-0">
-            <h3 className="font-semibold text-lg truncate group-hover:text-primary transition-colors">
+          <div className="space-y-2 flex-1 min-w-0">
+            <h3 className="font-playfair font-semibold text-xl truncate group-hover:text-primary transition-colors">
               {job.title}
             </h3>
-            <p className="text-muted-foreground font-medium">
+            <p className="text-muted-foreground font-medium text-base">
               {job.company}
             </p>
             {job.location && (
@@ -75,30 +75,30 @@ export function JobCard({ job, onEdit, onDelete, onView }: JobCardProps) {
         </div>
       </CardHeader>
       
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-4 p-8 pt-0">
         {/* Documents used */}
         <div className="space-y-2">
           {job.resumeUsed && (
             <div className="flex items-center text-sm text-muted-foreground">
-              <FileText className="mr-2 h-3 w-3" />
+              <FileText className="mr-2 h-4 w-4" />
               <span className="truncate">Resume: {job.resumeUsed}</span>
             </div>
           )}
           {job.coverLetterUsed && (
             <div className="flex items-center text-sm text-muted-foreground">
-              <FileText className="mr-2 h-3 w-3" />
+              <FileText className="mr-2 h-4 w-4" />
               <span className="truncate">Cover: {job.coverLetterUsed}</span>
             </div>
           )}
         </div>
         
         {/* Source and date */}
-        <div className="flex items-center justify-between text-sm text-muted-foreground pt-2 border-t">
+        <div className="flex items-center justify-between text-sm text-muted-foreground pt-3 border-t">
           <span className="font-medium">
             via {job.source}
           </span>
           <div className="flex items-center">
-            <Calendar className="mr-1 h-3 w-3" />
+            <Calendar className="mr-1.5 h-4 w-4" />
             <span>
               {formatDistanceToNow(job.applicationDate, { addSuffix: true })}
             </span>
@@ -107,7 +107,7 @@ export function JobCard({ job, onEdit, onDelete, onView }: JobCardProps) {
         
         {/* Salary if available */}
         {job.salary && (
-          <div className="text-sm font-medium text-velvet-rose">
+          <div className="text-base font-medium text-velvet-rose">
             {job.salary}
           </div>
         )}

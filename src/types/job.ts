@@ -16,6 +16,8 @@ export interface Job {
   contactEmail?: string;
   nextSteps?: string;
   followUpDate?: Date;
+  feelings?: string;
+  lessonsLearned?: string;
 }
 
 export interface JobFormData {
@@ -34,6 +36,8 @@ export interface JobFormData {
   contactEmail?: string;
   nextSteps?: string;
   followUpDate?: Date;
+  feelings?: string;
+  lessonsLearned?: string;
 }
 
 export const JOB_STATUSES = [

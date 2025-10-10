@@ -40,6 +40,8 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
     contactPerson: '',
     contactEmail: '',
     nextSteps: '',
+    feelings: '',
+    lessonsLearned: '',
   });
 
   // Populate form when editing
@@ -60,6 +62,8 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
         contactPerson: job.contactPerson || '',
         contactEmail: job.contactEmail || '',
         nextSteps: job.nextSteps || '',
+        feelings: job.feelings || '',
+        lessonsLearned: job.lessonsLearned || '',
       });
       setFollowUpDate(job.followUpDate);
     } else {
@@ -79,6 +83,8 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
         contactPerson: '',
         contactEmail: '',
         nextSteps: '',
+        feelings: '',
+        lessonsLearned: '',
       });
       setFollowUpDate(undefined);
     }
@@ -89,8 +95,8 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
     
     if (!formData.title.trim() || !formData.company.trim()) {
       toast({
-        title: "Missing information",
-        description: "Please fill in at least the job title and company.",
+        title: "Just a moment...",
+        description: "Please share the role and company to continue your journey.",
         variant: "destructive",
       });
       return;
@@ -107,10 +113,10 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
       });
       
       toast({
-        title: job ? "Job updated!" : "Job added!",
+        title: job ? "Journey updated ✨" : "Step added to your journey ✨",
         description: job 
           ? `${formData.title} at ${formData.company} has been updated.`
-          : `${formData.title} at ${formData.company} has been added to your tracker.`,
+          : `${formData.title} at ${formData.company} is now part of your story.`,
       });
       
       onClose();
@@ -131,43 +137,51 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="font-heading text-2xl">
-            {job ? 'Edit Job Application' : 'Add New Job Application'}
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl animate-in fade-in-0 zoom-in-95">
+        <DialogHeader className="space-y-3">
+          <DialogTitle className="font-playfair text-3xl">
+            {job ? 'Reflect on Your Journey' : 'Add a Step in Your Journey'}
           </DialogTitle>
+          <p className="text-muted-foreground text-sm">
+            {job ? 'Update your experience and thoughts' : 'Capture this opportunity and how it makes you feel'}
+          </p>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
           {/* Basic Information */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="title">Job Title *</Label>
-              <Input
-                id="title"
-                value={formData.title}
-                onChange={(e) => updateFormData('title', e.target.value)}
-                placeholder="Software Engineer"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="company">Company *</Label>
-              <Input
-                id="company"
-                value={formData.company}
-                onChange={(e) => updateFormData('company', e.target.value)}
-                placeholder="Tech Corp"
-                required
-              />
+          <div className="space-y-1">
+            <h3 className="font-playfair text-lg mb-4">The Essentials</h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="title" className="text-sm font-medium">Role *</Label>
+                <Input
+                  id="title"
+                  value={formData.title}
+                  onChange={(e) => updateFormData('title', e.target.value)}
+                  placeholder="e.g., Senior Designer"
+                  required
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="company" className="text-sm font-medium">Company *</Label>
+                <Input
+                  id="company"
+                  value={formData.company}
+                  onChange={(e) => updateFormData('company', e.target.value)}
+                  placeholder="e.g., Acme Studios"
+                  required
+                  className="rounded-xl"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="status">Status</Label>
+              <Label htmlFor="status" className="text-sm font-medium">Current Status</Label>
               <Select value={formData.status} onValueChange={(value) => updateFormData('status', value)}>
-                <SelectTrigger>
+                <SelectTrigger className="rounded-xl">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -180,133 +194,180 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="source">Source</Label>
+              <Label htmlFor="source" className="text-sm font-medium">Where You Found It</Label>
               <Input
                 id="source"
                 value={formData.source}
                 onChange={(e) => updateFormData('source', e.target.value)}
-                placeholder="LinkedIn, Indeed, Company Website"
+                placeholder="e.g., LinkedIn, Company Site"
+                className="rounded-xl"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="location">Location</Label>
+              <Label htmlFor="location" className="text-sm font-medium">Location</Label>
               <Input
                 id="location"
                 value={formData.location}
                 onChange={(e) => updateFormData('location', e.target.value)}
-                placeholder="San Francisco, CA"
+                placeholder="e.g., Remote or City"
+                className="rounded-xl"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="salary">Salary Range</Label>
+              <Label htmlFor="salary" className="text-sm font-medium">Salary Range</Label>
               <Input
                 id="salary"
                 value={formData.salary}
                 onChange={(e) => updateFormData('salary', e.target.value)}
-                placeholder="$80k - $120k"
+                placeholder="e.g., $80k - $120k"
+                className="rounded-xl"
               />
             </div>
           </div>
 
           {/* Documents */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="resumeUsed">Resume Used</Label>
-              <Input
-                id="resumeUsed"
-                value={formData.resumeUsed}
-                onChange={(e) => updateFormData('resumeUsed', e.target.value)}
-                placeholder="Software_Engineer_Resume_v2.pdf"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="coverLetterUsed">Cover Letter Used</Label>
-              <Input
-                id="coverLetterUsed"
-                value={formData.coverLetterUsed}
-                onChange={(e) => updateFormData('coverLetterUsed', e.target.value)}
-                placeholder="Cover_Letter_TechCorp.pdf"
-              />
+          <div className="space-y-1 pt-4 border-t">
+            <h3 className="font-playfair text-lg mb-4">Documents Shared</h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="resumeUsed" className="text-sm font-medium">Resume Used</Label>
+                <Input
+                  id="resumeUsed"
+                  value={formData.resumeUsed}
+                  onChange={(e) => updateFormData('resumeUsed', e.target.value)}
+                  placeholder="e.g., Resume_2024.pdf"
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="coverLetterUsed" className="text-sm font-medium">Cover Letter Used</Label>
+                <Input
+                  id="coverLetterUsed"
+                  value={formData.coverLetterUsed}
+                  onChange={(e) => updateFormData('coverLetterUsed', e.target.value)}
+                  placeholder="e.g., Cover_Letter.pdf"
+                  className="rounded-xl"
+                />
+              </div>
             </div>
           </div>
 
           {/* Additional Details */}
-          <div className="space-y-2">
-            <Label htmlFor="jobUrl">Job Posting URL</Label>
-            <Input
-              id="jobUrl"
-              type="url"
-              value={formData.jobUrl}
-              onChange={(e) => updateFormData('jobUrl', e.target.value)}
-              placeholder="https://example.com/job-posting"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-6 pt-4 border-t">
+            <h3 className="font-playfair text-lg mb-4">More Details (Optional)</h3>
+            
             <div className="space-y-2">
-              <Label htmlFor="contactPerson">Contact Person</Label>
+              <Label htmlFor="jobUrl" className="text-sm font-medium">Job Posting Link</Label>
               <Input
-                id="contactPerson"
-                value={formData.contactPerson}
-                onChange={(e) => updateFormData('contactPerson', e.target.value)}
-                placeholder="Jane Smith, HR Manager"
+                id="jobUrl"
+                type="url"
+                value={formData.jobUrl}
+                onChange={(e) => updateFormData('jobUrl', e.target.value)}
+                placeholder="https://example.com/careers/job-posting"
+                className="rounded-xl"
               />
             </div>
+
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="contactPerson" className="text-sm font-medium">Contact Person</Label>
+                <Input
+                  id="contactPerson"
+                  value={formData.contactPerson}
+                  onChange={(e) => updateFormData('contactPerson', e.target.value)}
+                  placeholder="e.g., Jane Smith"
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contactEmail" className="text-sm font-medium">Contact Email</Label>
+                <Input
+                  id="contactEmail"
+                  type="email"
+                  value={formData.contactEmail}
+                  onChange={(e) => updateFormData('contactEmail', e.target.value)}
+                  placeholder="e.g., jane@company.com"
+                  className="rounded-xl"
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <Label htmlFor="contactEmail">Contact Email</Label>
-              <Input
-                id="contactEmail"
-                type="email"
-                value={formData.contactEmail}
-                onChange={(e) => updateFormData('contactEmail', e.target.value)}
-                placeholder="jane.smith@techcorp.com"
+              <Label htmlFor="description" className="text-sm font-medium">Role Description</Label>
+              <Textarea
+                id="description"
+                value={formData.description}
+                onChange={(e) => updateFormData('description', e.target.value)}
+                placeholder="What excites you about this role?"
+                rows={3}
+                className="rounded-xl"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Job Description</Label>
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => updateFormData('description', e.target.value)}
-              placeholder="Brief description of the role and requirements..."
-              rows={3}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="notes">Notes</Label>
+            <Label htmlFor="notes" className="text-sm font-medium">Notes & Reflections</Label>
             <Textarea
               id="notes"
               value={formData.notes}
               onChange={(e) => updateFormData('notes', e.target.value)}
-              placeholder="Interview feedback, application insights, etc..."
+              placeholder="Jot down your thoughts, interview feedback, or key details..."
               rows={3}
+              className="rounded-xl"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          {/* Journaling Fields */}
+          <div className="space-y-6 pt-4 border-t">
+            <h3 className="font-playfair text-lg">Your Inner Journey 🌿</h3>
+            
             <div className="space-y-2">
-              <Label htmlFor="nextSteps">Next Steps</Label>
+              <Label htmlFor="feelings" className="text-sm font-medium">How did you feel after applying?</Label>
+              <Textarea
+                id="feelings"
+                value={formData.feelings}
+                onChange={(e) => updateFormData('feelings', e.target.value)}
+                placeholder="Excited, nervous, hopeful, uncertain... there's no wrong answer"
+                rows={2}
+                className="rounded-xl"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="lessonsLearned" className="text-sm font-medium">Lessons learned or insights</Label>
+              <Textarea
+                id="lessonsLearned"
+                value={formData.lessonsLearned}
+                onChange={(e) => updateFormData('lessonsLearned', e.target.value)}
+                placeholder="What did you discover about yourself or this process?"
+                rows={2}
+                className="rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="nextSteps" className="text-sm font-medium">Next Steps</Label>
               <Input
                 id="nextSteps"
                 value={formData.nextSteps}
                 onChange={(e) => updateFormData('nextSteps', e.target.value)}
-                placeholder="Follow up, interview preparation, etc."
+                placeholder="e.g., Follow up next week"
+                className="rounded-xl"
               />
             </div>
             <div className="space-y-2">
-              <Label>Follow-up Date</Label>
+              <Label className="text-sm font-medium">Follow-up Date</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal rounded-xl",
                       !followUpDate && "text-muted-foreground"
                     )}
                   >
@@ -314,13 +375,13 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
                     {followUpDate ? format(followUpDate, "PPP") : <span>Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 rounded-xl" align="start">
                   <Calendar
                     mode="single"
                     selected={followUpDate}
                     onSelect={setFollowUpDate}
                     initialFocus
-                    className="pointer-events-auto"
+                    className="pointer-events-auto rounded-xl"
                   />
                 </PopoverContent>
               </Popover>
@@ -328,16 +389,16 @@ export function AddJobModal({ isOpen, onClose, onSave, job }: AddJobModalProps) 
           </div>
 
           {/* Action buttons */}
-          <div className="flex justify-end space-x-3 pt-6 border-t">
-            <Button type="button" variant="outline" onClick={onClose}>
-              Cancel
+          <div className="flex justify-end space-x-3 pt-8 border-t">
+            <Button type="button" variant="outline" onClick={onClose} className="rounded-xl">
+              Maybe Later
             </Button>
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="bg-gradient-primary hover:opacity-90"
+              className="bg-gradient-primary hover:opacity-90 rounded-xl"
             >
-              {isLoading ? 'Saving...' : (job ? 'Update Job' : 'Add Job')}
+              {isLoading ? 'Saving your journey...' : (job ? 'Update Journey' : 'Add to Journal')}
             </Button>
           </div>
         </form>
