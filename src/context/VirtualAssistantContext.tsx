@@ -136,7 +136,7 @@ export function VirtualAssistantProvider({ children }: VirtualAssistantProviderP
     
     addMessage({
       sender: 'jobsy',
-      content: "Hey there! 👋 I'm Jobsy, your Job Journal assistant. Welcome to your new job tracking companion! I'm here to help you master this platform and land your dream job.",
+      content: "Hey there! 👋 I'm Jobsy, your Job Journa assistant. Welcome to your new job tracking companion! I'm here to help you master this platform and land your dream job.",
       type: 'text'
     });
 

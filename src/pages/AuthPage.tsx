@@ -26,7 +26,7 @@ export function AuthPage({ onNavigateToHome }: AuthPageProps) {
       await login(loginData.email, loginData.password);
       toast({
         title: "Welcome back!",
-        description: "You've successfully logged in to Job Journal.",
+        description: "You've successfully logged in to Job Journa.",
       });
     } catch (error) {
       toast({
@@ -43,7 +43,7 @@ export function AuthPage({ onNavigateToHome }: AuthPageProps) {
       await register(registerData.email, registerData.password, registerData.name);
       toast({
         title: "Account created!",
-        description: "Welcome to Job Journal. Let's start tracking your applications.",
+        description: "Welcome to Job Journa. Let's start tracking your applications.",
       });
     } catch (error) {
       toast({
@@ -75,7 +75,7 @@ export function AuthPage({ onNavigateToHome }: AuthPageProps) {
               <Briefcase className="h-6 w-6 text-white" />
             </div>
             <h1 className="font-heading text-3xl font-bold gradient-primary bg-clip-text text-transparent">
-              Job Journal
+              Job Journa
             </h1>
           </div>
           <p className="text-muted-foreground text-lg">

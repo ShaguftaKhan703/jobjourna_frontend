@@ -61,7 +61,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
     {
       name: "Sarah Johnson",
       role: "Software Engineer",
-      content: "Job Journal helped me land my dream job at Google. The tracking features are incredible!",
+      content: "Job Journa helped me land my dream job at Google. The tracking features are incredible!",
       rating: 5
     },
     {
@@ -98,7 +98,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
               <div className="font-heading text-xl font-bold gradient-primary bg-clip-text text-transparent">
-                Job Journal
+                Job Journa
               </div>
             </div>
 
@@ -225,7 +225,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">
-              Why Choose Job Journal?
+              Why Choose Job Journa?
             </h3>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Powerful features designed to streamline your job search and maximize your success rate.
@@ -273,13 +273,13 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                 
                 <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    Job Journal was born from a simple realization — job searching is more than a process; it's an emotional journey.
+                    Job Journa was born from a simple realization — job searching is more than a process; it's an emotional journey.
                   </p>
                   <p>
                     Our founder experienced firsthand how stressful and scattered the job hunt can feel — endless tabs, lost notes, forgotten follow-ups.
                   </p>
                   <p>
-                    So she built Job Journal, not as another tracker, but as a <span className="text-foreground font-semibold">career companion</span> — 
+                    So she built Job Journa, not as another tracker, but as a <span className="text-foreground font-semibold">career companion</span> — 
                     a calm, intelligent space where you can organize, reflect, and grow through every step of your professional path.
                   </p>
                 </div>
@@ -363,14 +363,14 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                 
                 <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    At Job Journal, we believe clarity and compassion should guide every career move.
+                    At Job Journa, we believe clarity and compassion should guide every career move.
                   </p>
                   <p>
                     Our mission is to turn job searching into a <span className="text-foreground font-semibold">mindful experience</span> — 
                     powered by AI, designed with empathy, and built for growth.
                   </p>
                   <p>
-                    Job Journal is where ambition meets peace of mind — where technology doesn't overwhelm, it empowers.
+                    Job Journa is where ambition meets peace of mind — where technology doesn't overwhelm, it empowers.
                   </p>
                   <p className="text-foreground font-semibold">
                     We're creating not just a product, but a feeling: a sense of progress, calm, and confidence every time you log in.
@@ -397,11 +397,11 @@ export function Home({ onNavigateToAuth }: HomeProps) {
       <section id="about" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">About Job Journal</h3>
+            <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-8">About Job Journa</h3>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="text-left">
                 <p className="text-lg text-muted-foreground mb-6">
-                  Job Journal was born from the frustration of managing countless job applications across spreadsheets, emails, and sticky notes. We believe that finding your dream job shouldn't be chaotic.
+                  Job Journa was born from the frustration of managing countless job applications across spreadsheets, emails, and sticky notes. We believe that finding your dream job shouldn't be chaotic.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
                   Our platform combines intelligent tracking, insightful analytics, and seamless integrations to transform your job search from overwhelming to organized.
@@ -497,7 +497,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
           <div className="text-center mb-16">
             <h3 className="font-heading text-3xl lg:text-4xl font-bold mb-4">What Our Users Say</h3>
             <p className="text-xl text-muted-foreground">
-              Real feedback from real job seekers who found success with Job Journal.
+              Real feedback from real job seekers who found success with Job Journa.
             </p>
           </div>
 
@@ -528,7 +528,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <h4 className="font-heading text-lg font-bold mb-4 gradient-primary bg-clip-text text-transparent">
-                Job Journal
+                Job Journa
               </h4>
               <p className="text-muted-foreground mb-4">
                 Transform your job search journey with intelligent tracking and insights.
@@ -560,7 +560,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Job Journal. All rights reserved.</p>
+            <p>&copy; 2024 Job Journa. All rights reserved.</p>
           </div>
         </div>
       </footer>

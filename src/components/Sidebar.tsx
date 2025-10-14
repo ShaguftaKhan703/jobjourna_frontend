@@ -93,7 +93,7 @@ function SidebarContent({
       <div className="flex h-16 items-center justify-between px-6 border-b">
         <div className="flex items-center">
           <h1 className="font-heading text-xl font-bold gradient-primary bg-clip-text text-transparent">
-            Job Journal
+            Job Journa
           </h1>
         </div>
         {isMobile && (

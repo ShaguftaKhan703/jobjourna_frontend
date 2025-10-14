@@ -23,7 +23,7 @@ export function Navbar() {
               <Menu className="h-5 w-5" />
             </Button>
             <h1 className="font-heading text-lg font-bold gradient-primary bg-clip-text text-transparent">
-              Job Journal
+              Job Journa
             </h1>
           </div>
 
