@@ -52,7 +52,7 @@ export function VirtualAssistantProvider({ children }: VirtualAssistantProviderP
   const { authState } = useAuth();
   const location = useLocation();
 
-  // Check if user is new (first visit)
+  // Check if user is new (first visit) or on home page
   useEffect(() => {
     if (authState.isAuthenticated && !hasSeenOnboarding) {
       const hasSeenBefore = localStorage.getItem('jobsy-onboarding-completed');
@@ -64,7 +64,18 @@ export function VirtualAssistantProvider({ children }: VirtualAssistantProviderP
         setHasSeenOnboarding(true);
       }
     }
-  }, [authState.isAuthenticated]);
+    
+    // Welcome message for home page visitors (non-authenticated)
+    if (!authState.isAuthenticated && location.pathname === '/dashboard') {
+      const hasSeenHomeGreeting = sessionStorage.getItem('jobsy-home-greeting');
+      if (!hasSeenHomeGreeting) {
+        setTimeout(() => {
+          showHomeGreeting();
+        }, 3000); // Show after 3 seconds
+        sessionStorage.setItem('jobsy-home-greeting', 'true');
+      }
+    }
+  }, [authState.isAuthenticated, location.pathname]);
 
   // Dashboard specific triggers
   useEffect(() => {
@@ -184,6 +195,27 @@ export function VirtualAssistantProvider({ children }: VirtualAssistantProviderP
     });
   };
 
+  const showHomeGreeting = () => {
+    clearMessages();
+    showAssistant();
+    
+    addMessage({
+      sender: 'jobsy',
+      content: "Hey there! 👋 I'm Jobsy, your virtual career companion. Welcome to Job Journa – where your job search journey becomes calm, organized, and empowering.",
+      type: 'text'
+    });
+
+    setTimeout(() => {
+      addMessage({
+        sender: 'jobsy',
+        content: "I'm here to guide you through everything! I can help you understand how Job Journa works, answer questions about our features, and even help you get started once you sign up. What would you like to know?",
+        type: 'suggestion',
+        suggestions: ['How does Job Journa work?', 'What features do you offer?', 'Tell me about pricing', 'I\'m ready to start!'],
+        onSuggestionClick: handleHomeGreetingSuggestion
+      });
+    }, 2000);
+  };
+
   const showInactivityTip = () => {
     const tips = [
       "💡 Did you know you can track interview dates and follow-up reminders for each job?",
@@ -300,6 +332,82 @@ export function VirtualAssistantProvider({ children }: VirtualAssistantProviderP
         addMessage({
           sender: 'jobsy',
           content: "No worries! I'll be here when you're ready to add jobs or need any help! 👍",
+          type: 'text'
+        });
+      }
+    }, 1000);
+  };
+
+  const handleHomeGreetingSuggestion = (suggestion: string) => {
+    addMessage({
+      sender: 'user',
+      content: suggestion,
+      type: 'text'
+    });
+
+    setTimeout(() => {
+      if (suggestion === 'How does Job Journa work?') {
+        addMessage({
+          sender: 'jobsy',
+          content: "Job Journa is your digital career companion! 🌿 It helps you track every job application in one calm, organized space. You can add jobs, track their status, set reminders, add personal notes about how you felt, and use AI tools to create cover letters and prepare for interviews.",
+          type: 'text'
+        });
+        setTimeout(() => {
+          addMessage({
+            sender: 'jobsy',
+            content: "Want to know more about specific features?",
+            type: 'suggestion',
+            suggestions: ['Tell me about AI features', 'What about tracking?', 'I\'m ready to sign up!'],
+            onSuggestionClick: handleHomeGreetingSuggestion
+          });
+        }, 2000);
+      } else if (suggestion === 'What features do you offer?' || suggestion === 'Tell me about AI features') {
+        addMessage({
+          sender: 'jobsy',
+          content: "We have amazing features! ✨\n\n📊 Smart job tracking with status updates\n🤖 AI-powered cover letter generation\n📝 Personal journaling for each application\n📈 Analytics to track your progress\n🔔 Reminders for follow-ups and interviews\n💼 Resume and document management",
+          type: 'text'
+        });
+        setTimeout(() => {
+          addMessage({
+            sender: 'jobsy',
+            content: "Ready to experience it yourself?",
+            type: 'suggestion',
+            suggestions: ['Yes, let\'s start!', 'Tell me about pricing', 'I have more questions'],
+            onSuggestionClick: handleHomeGreetingSuggestion
+          });
+        }, 2000);
+      } else if (suggestion === 'Tell me about pricing' || suggestion === 'What about tracking?') {
+        addMessage({
+          sender: 'jobsy',
+          content: "Job Journa offers both free and premium plans! The free plan gives you core job tracking features, while premium unlocks unlimited AI cover letters, advanced analytics, and priority support. You can start with the free plan and upgrade anytime! 💜",
+          type: 'text'
+        });
+        setTimeout(() => {
+          addMessage({
+            sender: 'jobsy',
+            content: "Want to get started?",
+            type: 'suggestion',
+            suggestions: ['Yes, sign me up!', 'Tell me more about features', 'I\'ll think about it'],
+            onSuggestionClick: handleHomeGreetingSuggestion
+          });
+        }, 2000);
+      } else if (suggestion === 'I\'m ready to start!' || suggestion === 'Yes, let\'s start!' || suggestion === 'Yes, sign me up!' || suggestion === 'I\'m ready to sign up!') {
+        addMessage({
+          sender: 'jobsy',
+          content: "Wonderful! 🎉 Click the 'Get Started' button at the top to create your free account. I'll be here to guide you through everything once you're in!",
+          type: 'text'
+        });
+      } else if (suggestion === 'I have more questions' || suggestion === 'I\'ll think about it') {
+        addMessage({
+          sender: 'jobsy',
+          content: "Of course! Take your time. I'm here whenever you need me – just click on me anytime. Feel free to explore the page and learn more about Job Journa. 🌸",
+          type: 'text'
+        });
+        setTimeout(() => minimizeAssistant(), 3000);
+      } else {
+        addMessage({
+          sender: 'jobsy',
+          content: "I'm here to help! Feel free to ask me anything about Job Journa.",
           type: 'text'
         });
       }
