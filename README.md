@@ -142,4 +142,4 @@ MIT License - see [LICENSE](LICENSE)
 
 **Built with empathy, designed with elegance 💜**
 
-</div>tricks/custom-domain#step-by-step-guide)
+</div>
