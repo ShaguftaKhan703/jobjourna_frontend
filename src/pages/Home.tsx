@@ -21,6 +21,7 @@ import {
  } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { VirtualAssistant } from '@/components/VirtualAssistant';
 import founderVisionImage from '@/assets/founder-vision-illustration.jpg';
 
 interface HomeProps {
@@ -128,6 +129,7 @@ export function Home({ onNavigateToAuth }: HomeProps) {
               >
                 Community
               </button>
+              <ThemeToggle />
               <Button onClick={onNavigateToAuth} className="gradient-primary text-white">
                 Get Started
               </Button>
@@ -170,6 +172,10 @@ export function Home({ onNavigateToAuth }: HomeProps) {
                 >
                   Community
                 </button>
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <span className="text-sm text-muted-foreground">Theme</span>
+                </div>
                 <Button onClick={onNavigateToAuth} className="gradient-primary text-white w-full">
                   Get Started
                 </Button>
@@ -565,10 +571,8 @@ export function Home({ onNavigateToAuth }: HomeProps) {
         </div>
       </footer>
 
-      {/* Floating Theme Toggle */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
+      {/* Jobsy Virtual Assistant */}
+      <VirtualAssistant />
     </div>
   );
 }
