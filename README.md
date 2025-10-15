@@ -1,73 +1,145 @@
-# Welcome to your Lovable project
 
-## Project info
 
-**URL**: https://lovable.dev/projects/2a8549ea-73fa-4d0e-b104-1d99315f5b4d
+# 🌸 JobJourna Frontend
 
-## How can I edit this code?
+> **Where your career story unfolds** — Your personal AI-powered career companion
 
-There are several ways of editing your application.
+[![Next.js](https://img.shields.io/badge/Next.js-15.x-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8)](https://tailwindcss.com/)
 
-**Use Lovable**
+## 📖 What is JobJourna?
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2a8549ea-73fa-4d0e-b104-1d99315f5b4d) and start prompting.
+JobJourna is your personal AI-powered career companion — a place where you can organize, track, and grow your job search journey beautifully. Instead of messy spreadsheets or scattered notes, JobJourna helps you keep everything in one elegant, easy-to-use space.
 
-Changes made via Lovable will be committed automatically to this repo.
+**Core Principles:**
+- ✨ **Clarity** — See your entire job search at a glance
+- 💬 **Compassion** — A space that understands the emotional side of job searching
+- 🚀 **Growth** — Turn every job search into a learning experience
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🎯 Version 1 - Phase 1 (Current)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+**Goal:** Core Manual Tracking with Beautiful UI
 
-Follow these steps:
+### Features
+- [ ] User Authentication (Signup/Login)
+- [ ] Job Application Dashboard (Add/View/Update/Delete)
+- [ ] Status Filtering (Applied, Interview, Offer, Rejected)
+- [ ] Resume & Cover Letter Library
+- [ ] Mobile-Optimized Responsive UI
+- [ ] Dark Mode Toggle
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🛠️ Tech Stack
 
-# Step 3: Install the necessary dependencies.
-npm i
+- **Next.js 15** (App Router) — React framework with SSR
+- **TypeScript** — Type-safe development
+- **Tailwind CSS** — Utility-first styling
+- **ShadCN UI** — Accessible component library
+- **React Query** — Server state management
+- **Axios** — API communication
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+```bash
+node >= 18.x
+npm >= 9.x
+```
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/ShaguftaKhan703/jobjourna_frontend.git
+cd jobjourna_frontend
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+```
+
+Configure `.env.local`:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+```bash
+# Run development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open [http://localhost:3000](http://localhost:3000)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 📁 Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+jobjourna_frontend/
+├── app/                    # Next.js App Router
+├── components/             # React components
+│   ├── ui/                # ShadCN components
+│   └── features/          # Feature components
+├── lib/                   # Utils & API client
+├── styles/                # Global styles
+└── types/                 # TypeScript types
+```
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 📝 Available Scripts
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript check
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/2a8549ea-73fa-4d0e-b104-1d99315f5b4d) and click on Share -> Publish.
+## 🚢 Deployment
 
-## Can I connect a custom domain to my Lovable project?
+### Vercel (Recommended)
+1. Connect GitHub repository to Vercel
+2. Set environment variables
+3. Deploy automatically on push to `main`
 
-Yes, you can!
+### Docker
+```bash
+docker build -t jobjourna-frontend .
+docker run -p 3000:3000 jobjourna-frontend
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🗺️ What's Next?
+
+### Phase 2: AI-Assisted Magic
+- AI Cover Letter Generator
+- Chatbot-based job entry
+- Smart autocomplete suggestions
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE)
+
+---
+
+<div align="center">
+
+**Built with empathy, designed with elegance 💜**
+
+</div>tricks/custom-domain#step-by-step-guide)
